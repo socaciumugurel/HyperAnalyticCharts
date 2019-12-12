@@ -1,7 +1,7 @@
 import React from "react";
-import { BarChart } from "../charts/barChart";
-import { PieChart } from "../charts/pieChart";
-import { TreeMap } from "../charts/treemap";
+import { BarChart } from "../../charts/barChart/component";
+import { PieChart } from "../../charts/pieChart/pieChart";
+import { TreeMap } from "../../charts/treeMap/treemap";
 
 export class Panel extends React.Component<any> {
   render() {

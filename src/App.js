@@ -1,11 +1,9 @@
-import React from 'react';
-import './App.css';
-import { Dashboard } from './components/basics/dashboard';
+import React from "react";
+import "./App.css";
+import DashboardContainer from "./app/basics/dashboard/container";
 
 function App() {
-  return (
-    <Dashboard/>
-  );
+  return <DashboardContainer />;
 }
 
 export default App;
