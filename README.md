@@ -4,6 +4,7 @@ Create your own custom dashboard that helps you visualize big data through profe
 <h2>Prerequisites</h2>
 
 1. Install <a href="https://code.visualstudio.com/">VisualStudioCode</a>
+    - add <b>Prettier - Code formatter</b> extension to Visual Studio code
 2. Install <a href="https://git-scm.com/download/win">Git</a>
 2. Install <a href="https://nodejs.org/en/">NodeJS</a>
 
