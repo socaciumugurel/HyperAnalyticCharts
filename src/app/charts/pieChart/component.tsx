@@ -1,5 +1,5 @@
 import React from "react";
-import Highcharts, { SeriesOptionsType, ChartOptions } from "highcharts";
+import Highcharts, { SeriesOptionsType } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 const options: Highcharts.Options = {
