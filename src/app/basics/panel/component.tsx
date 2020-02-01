@@ -49,7 +49,11 @@ export class Panel extends React.Component<any, any> {
         component = <TreeMap />;
         break;
       case "AddNew":
-        component = <AddNew />;
+        component = (
+          <AddNew
+            toggleCreatePanelWizard={() => this.props.toggleCreatePanelWizard}
+          />
+        );
         break;
       default:
         component = <div>"Nada"</div>;

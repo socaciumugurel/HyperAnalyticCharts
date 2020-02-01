@@ -3,7 +3,8 @@ import { Dashboard } from "./component";
 
 const mapStateToProps = (state: any) => {
   return {
-    panels: state.dashboardReducer
+    panels: state.dashboardReducer,
+    isWizardVisible: state.createPanelReducer.isVisible
   };
 };
 

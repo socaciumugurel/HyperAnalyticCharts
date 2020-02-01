@@ -22,19 +22,27 @@ const INITIAL_STATE = [
     dataApi:
       "http://my-json-server.typicode.com/socaciumugurel/mockData/barChartSeries",
     config: {}
+  },
+  {
+    id: "1",
+    title: "Ttile1",
+    chartType: "AddNew",
+    dataApi: "",
+    config: {}
   }
 ];
 const dashboardReducer = (state = INITIAL_STATE, _action: any) => {
-  return [
-    ...state,
-    {
-      id: "1",
-      title: "Ttile1",
-      chartType: "AddNew",
-      dataApi: "",
-      config: {}
-    }
-  ];
+  // return [
+  //   ...state,
+  //   {
+  //     id: "1",
+  //     title: "Ttile1",
+  //     chartType: "AddNew",
+  //     dataApi: "",
+  //     config: {}
+  //   }
+  // ];
+  return state;
 };
 
 export default dashboardReducer;
