@@ -3,6 +3,7 @@ import { LineChart } from "../../charts/lineChart/component";
 import { PieChart } from "../../charts/pieChart/component";
 import { TreeMap } from "../../charts/treeMap/component";
 import { BarChart } from "../../charts/barChart/component";
+import { AddNew } from "../addNew/component";
 
 export class Panel extends React.Component<any, any> {
   constructor(props: any) {
@@ -48,7 +49,7 @@ export class Panel extends React.Component<any, any> {
         component = <TreeMap />;
         break;
       case "AddNew":
-        component = <div>"AddNew"</div>;
+        component = <AddNew />;
         break;
       default:
         component = <div>"Nada"</div>;

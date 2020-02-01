@@ -6,6 +6,19 @@
   border: 1px solid #f9f9f9;
   border-radius: 6px;
   box-shadow: 1px 1px 5px #cacaca;
+  text-align: center;
+  position: relative;
+  height: 500px;
+}
+
+.add-new-icon {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+}
+
+.add-new-icon:hover {
+  color: black;
 }
 
 @media only screen and (max-width: 900px) {
