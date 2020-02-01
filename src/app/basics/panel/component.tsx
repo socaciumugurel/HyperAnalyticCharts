@@ -15,20 +15,21 @@ export class Panel extends React.Component<any, any> {
   }
 
   componentDidMount() {
-    fetch(this.props.dataApi, {})
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({ series: result });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {
-          console.error("error: ");
-          console.error(error);
-        }
-      );
+    if (this.props.dataApi) {
+      fetch(this.props.dataApi, {})
+        .then(res => res.json())
+        .then(
+          result => {
+            this.setState({ series: result });
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          error => {
+            console.error(error);
+          }
+        );
+    }
   }
 
   render() {
