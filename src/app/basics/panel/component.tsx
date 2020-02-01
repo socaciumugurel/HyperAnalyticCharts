@@ -25,7 +25,7 @@ export class Panel extends React.Component<any> {
     }
 
     return (
-      <div>
+      <div className="panel">
         <h3>{this.props.title}</h3>
         {component}
       </div>

@@ -1,0 +1,15 @@
+.panel {
+  padding: 0 3%;
+  width: 40%;
+  float: left;
+  margin: 15px;
+  border: 1px solid #f9f9f9;
+  border-radius: 6px;
+  box-shadow: 1px 1px 5px #cacaca;
+}
+
+@media only screen and (max-width: 900px) {
+  .panel {
+    width: 90%;
+  }
+}
