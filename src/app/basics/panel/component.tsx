@@ -46,6 +46,9 @@ export class Panel extends React.Component<any, any> {
       case "treeMap":
         component = <TreeMap />;
         break;
+      case "AddNew":
+        component = <div>"AddNew"</div>;
+        break;
       default:
         component = <div>"Nada"</div>;
     }

@@ -1,11 +1,4 @@
 const INITIAL_STATE = [
-  // {
-  //   id: "1",
-  //   title: "Ttile1",
-  //   chartType: "treeMap",
-  //   dataApi: "",
-  //   config: {}
-  // },
   {
     id: "2",
     title: "Ttile2",
@@ -32,7 +25,16 @@ const INITIAL_STATE = [
   }
 ];
 const dashboardReducer = (state = INITIAL_STATE, _action: any) => {
-  return state;
+  return [
+    ...state,
+    {
+      id: "1",
+      title: "Ttile1",
+      chartType: "AddNew",
+      dataApi: "",
+      config: {}
+    }
+  ];
 };
 
 export default dashboardReducer;
