@@ -11,7 +11,7 @@ export class Dashboard extends React.Component<any> {
     return (
       <div>
         {this.props.isWizardVisible && <CreatePanelWizard />}
-        {chartComponents}
+        {!this.props.isWizardVisible && chartComponents}
       </div>
     );
   }

@@ -2,6 +2,17 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
+const dummyData = [
+  {
+    name: "First",
+    data: [1, 2, 3]
+  },
+  {
+    name: "Second",
+    data: [1, 2, 3]
+  }
+];
+
 export class BarChart extends React.Component<any, any> {
   render() {
     const options: Highcharts.Options = {
@@ -53,8 +64,7 @@ export class BarChart extends React.Component<any, any> {
         }
       }
     };
-
-    options.series = this.props.series;
+    options.series = this.props.series == null ? dummyData : this.props.series;
 
     return <HighchartsReact highcharts={Highcharts} options={options} />;
   }

@@ -1,9 +1,5 @@
 import React from "react";
-import { LineChart } from "../../charts/lineChart/component";
-import { PieChart } from "../../charts/pieChart/component";
-import { TreeMap } from "../../charts/treeMap/component";
-import { BarChart } from "../../charts/barChart/component";
-import { AddNew } from "../addNew/component";
+import { getComponent } from "../../utils";
 
 export class Panel extends React.Component<any, any> {
   constructor(props: any) {
@@ -34,30 +30,11 @@ export class Panel extends React.Component<any, any> {
   }
 
   render() {
-    let component = {};
-    switch (this.props.chartType) {
-      case "lineChart":
-        component = <LineChart series={this.state.series} />;
-        break;
-      case "pieChart":
-        component = <PieChart series={this.state.series} />;
-        break;
-      case "barChart":
-        component = <BarChart series={this.state.series} />;
-        break;
-      case "treeMap":
-        component = <TreeMap />;
-        break;
-      case "AddNew":
-        component = (
-          <AddNew
-            toggleCreatePanelWizard={() => this.props.toggleCreatePanelWizard}
-          />
-        );
-        break;
-      default:
-        component = <div>"Nada"</div>;
-    }
+    const component = getComponent(
+      this.props.chartType,
+      this.state.series,
+      this.props.toggleCreatePanelWizard
+    );
 
     return (
       <div className="panel">

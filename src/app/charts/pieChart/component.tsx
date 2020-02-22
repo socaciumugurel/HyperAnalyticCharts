@@ -2,6 +2,19 @@ import React from "react";
 import Highcharts, { SeriesOptionsType } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
+const dummyData = [
+  {
+    name: "First",
+    y: 50.0,
+    sliced: true,
+    selected: true
+  },
+  {
+    name: "Second",
+    y: 50.0
+  }
+];
+
 export class PieChart extends React.Component<any, any> {
   render() {
     const options: Highcharts.Options = {
@@ -29,9 +42,11 @@ export class PieChart extends React.Component<any, any> {
       {
         name: "Brands",
         colorByPoint: true,
-        data: this.props.series
+        data: this.props.series ? this.props.series : dummyData
       }
     ] as SeriesOptionsType[];
+
+    console.log(this.props.series);
     return <HighchartsReact highcharts={Highcharts} options={options} />;
   }
 }
