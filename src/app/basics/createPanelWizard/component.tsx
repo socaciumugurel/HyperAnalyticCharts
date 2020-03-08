@@ -2,6 +2,7 @@ import React from "react";
 import { Steps, Button, message, Select } from "antd";
 import "antd/dist/antd.css";
 import { getComponent } from "../../utils";
+import { SelectDataSourceContent } from "./step2/component";
 
 const { Step } = Steps;
 
@@ -49,7 +50,7 @@ const steps = [
   },
   {
     title: "Select data",
-    content: "Second-content"
+    content: <SelectDataSourceContent />
   },
   {
     title: "Last",
