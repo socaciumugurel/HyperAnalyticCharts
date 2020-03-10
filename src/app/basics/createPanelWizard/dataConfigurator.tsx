@@ -114,7 +114,6 @@ export class DataConfigurator extends React.Component<any, any> {
     this.setState({
       displayTable: true
     });
-    console.log(this.state);
   }
 
   render() {
