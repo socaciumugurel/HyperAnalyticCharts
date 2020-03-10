@@ -1,5 +1,5 @@
 import React from "react";
-import { Steps, Button, message, Select, Table } from "antd";
+import { Table } from "antd";
 import "antd/dist/antd.css";
 import Search from "antd/lib/input/Search";
 import { ColumnProps } from "antd/lib/table";
@@ -8,7 +8,7 @@ interface ConnectionSettings {
   url: string;
 }
 
-export class SelectDataSourceContent extends React.Component<any, any> {
+export class DataConfigurator extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = { displayTable: false };
