@@ -11,112 +11,52 @@ interface ConnectionSettings {
 export class DataConfigurator extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = { displayTable: false };
+    this.state = { displayTable: false, columns: [] };
   }
 
-  getData(_connectionSettings: ConnectionSettings) {
-    //make api call
-    const data = [];
-    for (let i = 0; i < 100; i++) {
-      data.push({
-        key: i,
-        name: `Edrward ${i}`,
-        age: 32,
-        address: `London Park no. ${i}`
-      });
-    }
+  getData(connectionSettings: ConnectionSettings) {
+    let data: any[] = [];
+
+    fetch(connectionSettings.url, {})
+      .then(res => res.json())
+      .then(
+        result => {
+          data = result;
+          const uniqueKeys = Object.keys(
+            data.reduce(function(result, obj) {
+              return Object.assign(result, obj);
+            }, {})
+          );
+
+          const columns = uniqueKeys.map(key => {
+            return {
+              title: key,
+              width: 100,
+              dataIndex: key,
+              key: key
+            };
+          });
+          this.setState({ columns, data });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        error => {}
+      );
+
     return data;
   }
 
   renderTable(data: any) {
     this.setState({
       data: data,
-      columns: [
-        {
-          title: "Full Name",
-          width: 100,
-          dataIndex: "name",
-          key: "name",
-          fixed: "left",
-          filters: [
-            {
-              text: "Edrward 4",
-              value: "Edrward 4"
-            },
-            {
-              text: "Edrward 5",
-              value: "Edrward 5"
-            }
-          ],
-          onFilter: (value: any, record: any) =>
-            record.name.indexOf(value) === 0
-        },
-        {
-          title: "Age",
-          width: 100,
-          dataIndex: "age",
-          key: "age",
-          fixed: "left",
-          sorter: (a: any, b: any) => a.age - b.age
-        },
-        {
-          title: "Column 1",
-          dataIndex: "address",
-          key: "1",
-          width: 150
-        },
-        {
-          title: "Column 2",
-          dataIndex: "address",
-          key: "2",
-          width: 150
-        },
-        {
-          title: "Column 3",
-          dataIndex: "address",
-          key: "3",
-          width: 150
-        },
-        {
-          title: "Column 4",
-          dataIndex: "address",
-          key: "4",
-          width: 150
-        },
-        {
-          title: "Column 5",
-          dataIndex: "address",
-          key: "5",
-          width: 150
-        },
-        {
-          title: "Column 6",
-          dataIndex: "address",
-          key: "6",
-          width: 150
-        },
-        {
-          title: "Column 7",
-          dataIndex: "address",
-          key: "7",
-          width: 150
-        },
-        { title: "Column 8", dataIndex: "address", key: "8" },
-        {
-          title: "Action",
-          key: "operation",
-          fixed: "right",
-          width: 100,
-          render: () => <a>action</a>
-        }
-      ]
-    });
-    this.setState({
+      columns: this.state.columns,
       displayTable: true
     });
   }
 
   render() {
+    console.log(this.state.data);
     return (
       <div className="dataSourcePanel">
         <Search
@@ -124,8 +64,11 @@ export class DataConfigurator extends React.Component<any, any> {
           enterButton="Get data"
           size="large"
           onSearch={(value: any) => {
-            var data = this.getData(value);
-            this.renderTable(data);
+            this.getData({
+              url:
+                "http://my-json-server.typicode.com/socaciumugurel/mockData/people"
+            });
+            this.renderTable(this.state.data);
           }}
         />
         <br />
