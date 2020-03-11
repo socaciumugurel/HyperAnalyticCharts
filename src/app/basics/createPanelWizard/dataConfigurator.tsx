@@ -53,8 +53,6 @@ export class DataConfigurator extends React.Component<any, any> {
 
   renderTable(data: any) {
     this.setState({
-      data: data,
-      columns: this.props.columns,
       displayTable: true
     });
   }
