@@ -2,7 +2,7 @@ import React from "react";
 import { Steps, Button, message } from "antd";
 import "antd/dist/antd.css";
 import DataConfiguratorContainer from "./dataConfigurator";
-import { ChartConfigurator } from "./chartConfigurator";
+import ChartConfiguratorContainer from "./chartConfigurator";
 
 const { Step } = Steps;
 const steps = [
@@ -12,7 +12,7 @@ const steps = [
   },
   {
     title: "Select chart type: ",
-    content: <ChartConfigurator></ChartConfigurator>
+    content: <ChartConfiguratorContainer />
   },
   {
     title: "Last",

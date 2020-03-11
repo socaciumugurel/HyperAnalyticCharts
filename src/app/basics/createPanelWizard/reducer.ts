@@ -6,8 +6,7 @@ const INITIAL_STATE = {
   columns: "",
   data: ""
 };
-
-const createPanelReducer = (state = INITIAL_STATE, action: any) => {
+export const createPanelReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
     case getType(toggleCreatePanelWizard):
       return {
@@ -27,4 +26,18 @@ const createPanelReducer = (state = INITIAL_STATE, action: any) => {
   }
 };
 
-export default createPanelReducer;
+export const dynamicTable = (
+  state = { data: [], columns: [] },
+  action: any
+) => {
+  switch (action.type) {
+    case getType(saveData):
+      return {
+        ...state,
+        data: action.payload.data,
+        columns: action.payload.columns
+      };
+    default:
+      return state;
+  }
+};

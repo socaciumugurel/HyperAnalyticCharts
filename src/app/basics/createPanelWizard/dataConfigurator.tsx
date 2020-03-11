@@ -4,7 +4,8 @@ import "antd/dist/antd.css";
 import Search from "antd/lib/input/Search";
 import { ColumnProps } from "antd/lib/table";
 import { connect } from "react-redux";
-import { saveData } from "./actions";
+import { saveData } from "../createPanelWizard/actions";
+import { DynamicTableData } from "./models";
 
 interface ConnectionSettings {
   url: string;
@@ -13,7 +14,7 @@ interface ConnectionSettings {
 export class DataConfigurator extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = { displayTable: false, columns: [] };
+    this.state = { displayTable: false };
   }
 
   getColumns(data: any) {
@@ -50,8 +51,7 @@ export class DataConfigurator extends React.Component<any, any> {
               .then(
                 data => {
                   const columns = this.getColumns(data);
-                  this.props.saveData(columns, data);
-                  this.setState({ columns, data });
+                  this.props.saveData({ columns, data });
                 },
                 error => {}
               )
@@ -62,8 +62,8 @@ export class DataConfigurator extends React.Component<any, any> {
         <br />
         {this.state.displayTable ? (
           <Table
-            columns={this.state.columns as ColumnProps<any>[]}
-            dataSource={this.state.data}
+            columns={this.props.columns as ColumnProps<any>[]}
+            dataSource={this.props.data}
             scroll={{ x: 1500, y: 300 }}
           />
         ) : null}
@@ -72,13 +72,16 @@ export class DataConfigurator extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    data: state.dynamicTable.data,
+    columns: state.dynamicTable.columns
+  };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    saveData
+    saveData: (value: DynamicTableData) => dispatch(saveData(value))
   };
 };
 

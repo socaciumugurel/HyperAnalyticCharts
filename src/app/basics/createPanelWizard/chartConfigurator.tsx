@@ -1,6 +1,8 @@
 import React from "react";
 import { getComponent } from "../../utils";
 import { Select } from "antd";
+import { connect } from "react-redux";
+
 export class ChartConfigurator extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -70,10 +72,21 @@ export class ChartConfigurator extends React.Component<any, any> {
           option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        {this.state.tableMetadata.map((column: any) => (
+        {this.props.columns.map((column: any) => (
           <Option value={column.title}>{column.title}</Option>
         ))}
       </Select>
     );
   }
 }
+
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    data: state.dynamicTable.data,
+    columns: state.dynamicTable.columns
+  };
+};
+
+const ChartConfiguratorContainer = connect(mapStateToProps)(ChartConfigurator);
+
+export default ChartConfiguratorContainer;
