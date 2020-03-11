@@ -3,6 +3,8 @@ import { Table } from "antd";
 import "antd/dist/antd.css";
 import Search from "antd/lib/input/Search";
 import { ColumnProps } from "antd/lib/table";
+import { connect } from "react-redux";
+import { saveData } from "./actions";
 
 interface ConnectionSettings {
   url: string;
@@ -14,61 +16,46 @@ export class DataConfigurator extends React.Component<any, any> {
     this.state = { displayTable: false, columns: [] };
   }
 
-  getData(connectionSettings: ConnectionSettings) {
-    let data: any[] = [];
+  getColumns(data: any) {
+    const uniqueKeys = Object.keys(
+      data.reduce(function(acumulator: any, obj: any) {
+        return Object.assign(acumulator, obj);
+      }, {})
+    );
 
-    fetch(connectionSettings.url, {})
-      .then(res => res.json())
-      .then(
-        result => {
-          data = result;
-          const uniqueKeys = Object.keys(
-            data.reduce(function(result, obj) {
-              return Object.assign(result, obj);
-            }, {})
-          );
-
-          const columns = uniqueKeys.map(key => {
-            return {
-              title: key,
-              width: 100,
-              dataIndex: key,
-              key: key
-            };
-          });
-          this.setState({ columns, data });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {}
-      );
-
-    return data;
-  }
-
-  renderTable(data: any) {
-    this.setState({
-      data: data,
-      columns: this.state.columns,
-      displayTable: true
+    return uniqueKeys.map(key => {
+      return {
+        title: key,
+        width: 100,
+        dataIndex: key,
+        key: key
+      };
     });
+  }
+  getDataPromise(connectionSettings: ConnectionSettings) {
+    return fetch(connectionSettings.url, {});
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div className="dataSourcePanel">
         <Search
+          defaultValue="http://my-json-server.typicode.com/socaciumugurel/mockData/people"
           placeholder="API Connection URL"
           enterButton="Get data"
           size="large"
           onSearch={(value: any) => {
-            this.getData({
-              url:
-                "http://my-json-server.typicode.com/socaciumugurel/mockData/people"
-            });
-            this.renderTable(this.state.data);
+            this.getDataPromise({ url: value })
+              .then(res => res.json())
+              .then(
+                data => {
+                  const columns = this.getColumns(data);
+                  this.props.saveData(columns, data);
+                  this.setState({ columns, data });
+                },
+                error => {}
+              )
+              .then(() => this.setState({ displayTable: true }));
           }}
         />
         <br />
@@ -84,3 +71,20 @@ export class DataConfigurator extends React.Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = () => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    saveData
+  };
+};
+
+const DataConfiguratorContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DataConfigurator);
+
+export default DataConfiguratorContainer;
