@@ -1,18 +1,18 @@
 import React from "react";
-import { Steps, Button, message, Select } from "antd";
+import { Steps, Button, message } from "antd";
 import "antd/dist/antd.css";
-import { DataConfigurator } from "./dataConfigurator";
-import { ChartConfigurator } from "./chartConfigurator";
+import DataConfiguratorContainer from "./dataConfigurator";
+import ChartConfiguratorContainer from "./chartConfigurator";
 
 const { Step } = Steps;
 const steps = [
   {
-    title: "Select chart type: ",
-    content: <ChartConfigurator></ChartConfigurator>
+    title: "Select data",
+    content: <DataConfiguratorContainer />
   },
   {
-    title: "Select data",
-    content: <DataConfigurator />
+    title: "Select chart type: ",
+    content: <ChartConfiguratorContainer />
   },
   {
     title: "Last",

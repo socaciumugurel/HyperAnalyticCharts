@@ -3,6 +3,9 @@ import { Table } from "antd";
 import "antd/dist/antd.css";
 import Search from "antd/lib/input/Search";
 import { ColumnProps } from "antd/lib/table";
+import { connect } from "react-redux";
+import { saveData } from "../createPanelWizard/actions";
+import { DynamicTableData } from "./models";
 
 interface ConnectionSettings {
   url: string;
@@ -11,7 +14,7 @@ interface ConnectionSettings {
 export class DataConfigurator extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = { displayTable: false, columns: [] };
+    this.state = { displayTable: false };
   }
 
   getData(connectionSettings: ConnectionSettings) {
@@ -36,7 +39,8 @@ export class DataConfigurator extends React.Component<any, any> {
               key: key
             };
           });
-          this.setState({ columns, data });
+
+          this.props.saveData({ columns, data });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -50,13 +54,12 @@ export class DataConfigurator extends React.Component<any, any> {
   renderTable(data: any) {
     this.setState({
       data: data,
-      columns: this.state.columns,
+      columns: this.props.columns,
       displayTable: true
     });
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div className="dataSourcePanel">
         <Search
@@ -68,15 +71,15 @@ export class DataConfigurator extends React.Component<any, any> {
               url:
                 "http://my-json-server.typicode.com/socaciumugurel/mockData/people"
             });
-            this.renderTable(this.state.data);
+            this.renderTable(this.props.data);
           }}
         />
         <br />
         <br />
         {this.state.displayTable ? (
           <Table
-            columns={this.state.columns as ColumnProps<any>[]}
-            dataSource={this.state.data}
+            columns={this.props.columns as ColumnProps<any>[]}
+            dataSource={this.props.data}
             scroll={{ x: 1500, y: 300 }}
           />
         ) : null}
@@ -84,3 +87,23 @@ export class DataConfigurator extends React.Component<any, any> {
     );
   }
 }
+
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    data: state.dynamicTable.data,
+    columns: state.dynamicTable.columns
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    saveData: (value: DynamicTableData) => dispatch(saveData(value))
+  };
+};
+
+const DataConfiguratorContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DataConfigurator);
+
+export default DataConfiguratorContainer;
