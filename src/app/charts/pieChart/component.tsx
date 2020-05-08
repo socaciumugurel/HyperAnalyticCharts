@@ -46,7 +46,6 @@ export class PieChart extends React.Component<any, any> {
       }
     ] as SeriesOptionsType[];
 
-    console.log(this.props.series);
     return <HighchartsReact highcharts={Highcharts} options={options} />;
   }
 }

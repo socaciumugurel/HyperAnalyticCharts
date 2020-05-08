@@ -15,12 +15,6 @@ export const createPanelReducer = (state = INITIAL_STATE, action: any) => {
         columns: "",
         data: ""
       };
-    case getType(saveData):
-      return {
-        ...state,
-        columns: action.payload.columns,
-        data: action.payload.data
-      };
     default:
       return state;
   }

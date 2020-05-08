@@ -1,6 +1,6 @@
 import React from "react";
 import { getComponent } from "../../utils";
-import { Select } from "antd";
+import { Select, Button } from "antd";
 import { connect } from "react-redux";
 
 export class ChartConfigurator extends React.Component<any, any> {
@@ -9,13 +9,21 @@ export class ChartConfigurator extends React.Component<any, any> {
     this.state = {
       selectedType: "",
       tableMetadata: [{ title: "a" }, { title: "b" }, { title: "c" }],
-      chartMetadata: {}
+      chartMetadata: {},
+      processedData: []
     };
   }
 
   getConfigurations(chartType: string) {
     switch (chartType) {
       case "lineChart":
+        return (
+          <div>
+            {this.selectAxis("Select data for X", "xColumn")}
+            {this.selectAxis("Select data for Y", "yColumn")}
+          </div>
+        );
+      case "pieChart":
         return (
           <div>
             {this.selectAxis("Select data for X", "xColumn")}
@@ -48,8 +56,24 @@ export class ChartConfigurator extends React.Component<any, any> {
           <Option value="lineChart">Line</Option>
           <Option value="pieChart">Pie</Option>
         </Select>
+        <Button
+          type="primary"
+          size={"default"}
+          onClick={() => {
+            {
+              var series = processData(
+                this.props.data,
+                this.state.chartMetadata.xColumn,
+                this.state.chartMetadata.yColumn
+              );
+              this.setState({ processedData: series });
+            }
+          }}
+        >
+          Refresh Chart
+        </Button>
         {this.getConfigurations(this.state.selectedType)}
-        {getComponent(this.state.selectedType, null, null)}
+        {getComponent(this.state.selectedType, this.state.processedData, null)}
       </div>
     );
   }
@@ -79,6 +103,28 @@ export class ChartConfigurator extends React.Component<any, any> {
     );
   }
 }
+
+const processData = function(data: any[], xColumn: string, yColumn: string) {
+  var groupBy = function(data: any, key: string, key2: string) {
+    return data.reduce(function(accumulator: any, item: any) {
+      (accumulator[item[key]] = accumulator[item[key]] || {
+        name: item[key],
+        y: 0
+      }).y += item[key2];
+      return accumulator;
+    }, {});
+  };
+  const groupedData = groupBy(
+    data,
+    xColumn ? xColumn : "eyeColor",
+    yColumn ? yColumn : "balance"
+  );
+  var result = Object.keys(groupedData).map(function(key) {
+    return groupedData[key];
+  });
+  result[0].sliced = true;
+  return result;
+};
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {

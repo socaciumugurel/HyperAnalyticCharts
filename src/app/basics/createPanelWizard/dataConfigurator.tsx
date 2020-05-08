@@ -46,7 +46,7 @@ export class DataConfigurator extends React.Component<any, any> {
           enterButton="Get data"
           size="large"
           onSearch={(value: any) => {
-            this.getDataPromise({ url: value })
+            this.getDataPromise({ url: "/mockData/people.json" })
               .then(res => res.json())
               .then(
                 data => {
