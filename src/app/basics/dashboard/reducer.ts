@@ -5,31 +5,31 @@ const INITIAL_STATE = [
     chartType: "lineChart",
     dataApi:
       "http://my-json-server.typicode.com/socaciumugurel/mockData/lineChartSeries",
-    config: {}
+    config: {},
   },
-  {
-    id: "3",
-    title: "Ttile3",
-    chartType: "pieChart",
-    dataApi:
-      "http://my-json-server.typicode.com/socaciumugurel/mockData/pieChart",
-    config: {}
-  },
+  // {
+  //   id: "3",
+  //   title: "Ttile3",
+  //   chartType: "pieChart",
+  //   dataApi:
+  //     "http://my-json-server.typicode.com/socaciumugurel/mockData/pieChart",
+  //   config: {}
+  // },
   {
     id: "4",
     title: "Title4",
     chartType: "barChart",
     dataApi:
       "http://my-json-server.typicode.com/socaciumugurel/mockData/barChartSeries",
-    config: {}
+    config: {},
   },
   {
     id: "1",
     title: "Ttile1",
     chartType: "AddNew",
     dataApi: "",
-    config: {}
-  }
+    config: {},
+  },
 ];
 const dashboardReducer = (state = INITIAL_STATE, _action: any) => {
   // return [

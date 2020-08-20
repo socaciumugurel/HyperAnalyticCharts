@@ -2,6 +2,7 @@ import React from "react";
 import { getComponent } from "../../utils";
 import { Select, Button } from "antd";
 import { connect } from "react-redux";
+import { ResponsivePie } from "@nivo/pie";
 
 export class ChartConfigurator extends React.Component<any, any> {
   constructor(props: any) {
@@ -10,7 +11,7 @@ export class ChartConfigurator extends React.Component<any, any> {
       selectedType: "",
       tableMetadata: [{ title: "a" }, { title: "b" }, { title: "c" }],
       chartMetadata: {},
-      processedData: []
+      processedData: [],
     };
   }
 
@@ -43,7 +44,11 @@ export class ChartConfigurator extends React.Component<any, any> {
           style={{ width: 200 }}
           placeholder="Select chart type"
           optionFilterProp="children"
-          onChange={(value: string) => this.setState({ selectedType: value })}
+          onChange={(value: string) => {
+            debugger;
+            console.log(value);
+            this.setState({ selectedType: value });
+          }}
           // onFocus={onFocus}
           // onBlur={onBlur}
           // onSearch={onSearch}
@@ -52,9 +57,15 @@ export class ChartConfigurator extends React.Component<any, any> {
             0
           }
         >
-          <Option value="barChart">Bar</Option>
-          <Option value="lineChart">Line</Option>
-          <Option value="pieChart">Pie</Option>
+          <Option key="1" value="barChart">
+            Bar
+          </Option>
+          <Option key="2" value="lineChart">
+            Line
+          </Option>
+          <Option key="3" value="pieChart">
+            Pie
+          </Option>
         </Select>
         <Button
           type="primary"
@@ -72,8 +83,14 @@ export class ChartConfigurator extends React.Component<any, any> {
         >
           Refresh Chart
         </Button>
-        {this.getConfigurations(this.state.selectedType)}
-        {getComponent(this.state.selectedType, this.state.processedData, null)}
+        <div> {this.getConfigurations(this.state.selectedType)}</div>
+        <div className="panel">
+          {getComponent(
+            this.state.selectedType,
+            this.state.processedData,
+            null
+          )}
+        </div>
       </div>
     );
   }
@@ -97,20 +114,23 @@ export class ChartConfigurator extends React.Component<any, any> {
         }
       >
         {this.props.columns.map((column: any) => (
-          <Option value={column.title}>{column.title}</Option>
+          <Option key={column.title} value={column.title}>
+            {column.title}
+          </Option>
         ))}
       </Select>
     );
   }
 }
 
-const processData = function(data: any[], xColumn: string, yColumn: string) {
-  var groupBy = function(data: any, key: string, key2: string) {
-    return data.reduce(function(accumulator: any, item: any) {
+const processData = function (data: any[], xColumn: string, yColumn: string) {
+  var groupBy = function (data: any, key: string, key2: string) {
+    return data.reduce(function (accumulator: any, item: any) {
       (accumulator[item[key]] = accumulator[item[key]] || {
-        name: item[key],
-        y: 0
-      }).y += item[key2];
+        id: item[key],
+        label: item[key],
+        value: 0,
+      }).value += item[key2];
       return accumulator;
     }, {});
   };
@@ -119,17 +139,17 @@ const processData = function(data: any[], xColumn: string, yColumn: string) {
     xColumn ? xColumn : "eyeColor",
     yColumn ? yColumn : "balance"
   );
-  var result = Object.keys(groupedData).map(function(key) {
+  var result = Object.keys(groupedData).map(function (key) {
     return groupedData[key];
   });
-  result[0].sliced = true;
+  debugger;
   return result;
 };
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
     data: state.dynamicTable.data,
-    columns: state.dynamicTable.columns
+    columns: state.dynamicTable.columns,
   };
 };
 

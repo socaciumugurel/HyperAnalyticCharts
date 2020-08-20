@@ -8,23 +8,23 @@ const { Step } = Steps;
 const steps = [
   {
     title: "Select data",
-    content: <DataConfiguratorContainer />
+    content: <DataConfiguratorContainer />,
   },
   {
     title: "Select chart type: ",
-    content: <ChartConfiguratorContainer />
+    content: <ChartConfiguratorContainer />,
   },
   {
     title: "Last",
-    content: "Last-content"
-  }
+    content: "Last-content",
+  },
 ];
 
 export class CreatePanelWizard extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      current: 0
+      current: 0,
     };
   }
 
@@ -43,7 +43,7 @@ export class CreatePanelWizard extends React.Component<any, any> {
     return (
       <div>
         <Steps current={current}>
-          {steps.map(item => (
+          {steps.map((item) => (
             <Step key={item.title} title={item.title} />
           ))}
         </Steps>
