@@ -2,7 +2,10 @@ import React from "react";
 import { getComponent } from "../../utils";
 import { Select, Button } from "antd";
 import { connect } from "react-redux";
-import { ResponsivePie } from "@nivo/pie";
+import { processPieChartData } from "../../charts/pieChart/dataProcessor";
+import { ChartType } from "../../charts/charts";
+import { processLineChartData } from "../../charts/lineChart/dataProcessor";
+import { processBarChartData } from "../../charts/barChart/dataProcessor";
 
 export class ChartConfigurator extends React.Component<any, any> {
   constructor(props: any) {
@@ -17,14 +20,21 @@ export class ChartConfigurator extends React.Component<any, any> {
 
   getConfigurations(chartType: string) {
     switch (chartType) {
-      case "lineChart":
+      case ChartType.LineChart:
         return (
           <div>
             {this.selectAxis("Select data for X", "xColumn")}
             {this.selectAxis("Select data for Y", "yColumn")}
           </div>
         );
-      case "pieChart":
+      case ChartType.PieChart:
+        return (
+          <div>
+            {this.selectAxis("Select data for X", "xColumn")}
+            {this.selectAxis("Select data for Y", "yColumn")}
+          </div>
+        );
+      case ChartType.BarChart:
         return (
           <div>
             {this.selectAxis("Select data for X", "xColumn")}
@@ -45,8 +55,6 @@ export class ChartConfigurator extends React.Component<any, any> {
           placeholder="Select chart type"
           optionFilterProp="children"
           onChange={(value: string) => {
-            debugger;
-            console.log(value);
             this.setState({ selectedType: value });
           }}
           // onFocus={onFocus}
@@ -57,13 +65,13 @@ export class ChartConfigurator extends React.Component<any, any> {
             0
           }
         >
-          <Option key="1" value="barChart">
+          <Option key="1" value={ChartType.BarChart}>
             Bar
           </Option>
-          <Option key="2" value="lineChart">
+          <Option key="2" value={ChartType.LineChart}>
             Line
           </Option>
-          <Option key="3" value="pieChart">
+          <Option key="3" value={ChartType.PieChart}>
             Pie
           </Option>
         </Select>
@@ -73,9 +81,9 @@ export class ChartConfigurator extends React.Component<any, any> {
           onClick={() => {
             {
               var series = processData(
+                this.state.selectedType,
                 this.props.data,
-                this.state.chartMetadata.xColumn,
-                this.state.chartMetadata.yColumn
+                this.state.chartMetadata
               );
               this.setState({ processedData: series });
             }
@@ -123,27 +131,25 @@ export class ChartConfigurator extends React.Component<any, any> {
   }
 }
 
-const processData = function (data: any[], xColumn: string, yColumn: string) {
-  var groupBy = function (data: any, key: string, key2: string) {
-    return data.reduce(function (accumulator: any, item: any) {
-      (accumulator[item[key]] = accumulator[item[key]] || {
-        id: item[key],
-        label: item[key],
-        value: 0,
-      }).value += item[key2];
-      return accumulator;
-    }, {});
-  };
-  const groupedData = groupBy(
-    data,
-    xColumn ? xColumn : "eyeColor",
-    yColumn ? yColumn : "balance"
-  );
-  var result = Object.keys(groupedData).map(function (key) {
-    return groupedData[key];
-  });
-  debugger;
-  return result;
+const processData = function (
+  chartType: string,
+  data: any[],
+  chartMetadata: any
+) {
+  switch (chartType) {
+    case ChartType.PieChart:
+      return processPieChartData(
+        data,
+        chartMetadata.xColumn,
+        chartMetadata.yColumn
+      );
+    case ChartType.LineChart:
+      return processLineChartData();
+    case ChartType.BarChart:
+      return processBarChartData();
+    default:
+      break;
+  }
 };
 
 const mapStateToProps = (state: any, ownProps: any) => {

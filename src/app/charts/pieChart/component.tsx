@@ -3,7 +3,7 @@ import { ResponsivePie } from "@nivo/pie";
 
 export class PieChart extends React.Component<any, any> {
   render() {
-    const x = (
+    return (
       <ResponsivePie
         data={this.props.series}
         margin={{ top: 40, right: 80, bottom: 100, left: 80 }}
@@ -118,8 +118,5 @@ export class PieChart extends React.Component<any, any> {
         ]}
       />
     );
-    debugger;
-
-    return x;
   }
 }
