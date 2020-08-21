@@ -1,8 +1,8 @@
 .panel {
   padding: 0 3%;
-  width: 40%;
+  width: 50%;
   float: left;
-  margin: 15px;
+  margin: auto;
   border: 1px solid #f9f9f9;
   border-radius: 6px;
   box-shadow: 1px 1px 5px #cacaca;
