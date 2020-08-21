@@ -7,14 +7,14 @@ const INITIAL_STATE = [
       "http://my-json-server.typicode.com/socaciumugurel/mockData/lineChartSeries",
     config: {},
   },
-  // {
-  //   id: "3",
-  //   title: "Ttile3",
-  //   chartType: "pieChart",
-  //   dataApi:
-  //     "http://my-json-server.typicode.com/socaciumugurel/mockData/pieChart",
-  //   config: {}
-  // },
+  {
+    id: "3",
+    title: "Ttile3",
+    chartType: "pieChart",
+    dataApi:
+      "http://my-json-server.typicode.com/socaciumugurel/mockData/pieChart",
+    config: {},
+  },
   {
     id: "4",
     title: "Title4",
