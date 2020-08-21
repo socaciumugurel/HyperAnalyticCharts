@@ -3,7 +3,6 @@ import { ResponsiveBar } from "@nivo/bar";
 
 export class BarChart extends React.Component<any, any> {
   render() {
-    debugger;
     return (
       <ResponsiveBar
         data={this.props.series}

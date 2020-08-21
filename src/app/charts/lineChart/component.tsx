@@ -10,7 +10,6 @@ export class LineChart extends React.Component<any, any> {
   }
 
   render() {
-    debugger;
     return (
       <ResponsiveLine
         data={this.props.series}

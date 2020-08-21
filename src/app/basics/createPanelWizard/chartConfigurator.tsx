@@ -25,6 +25,7 @@ export class ChartConfigurator extends React.Component<any, any> {
           <div>
             {this.selectAxis("Select data for X", "xColumn")}
             {this.selectAxis("Select data for Y", "yColumn")}
+            {this.selectAxis("Select grouping criteria", "groupCriteria")}
           </div>
         );
       case ChartType.PieChart:
@@ -55,6 +56,12 @@ export class ChartConfigurator extends React.Component<any, any> {
           placeholder="Select chart type"
           optionFilterProp="children"
           onChange={(value: string) => {
+            var series = processData(
+              value,
+              this.props.data,
+              this.state.chartMetadata
+            );
+            this.setState({ processedData: series });
             this.setState({ selectedType: value });
           }}
           // onFocus={onFocus}
@@ -145,9 +152,9 @@ const processData = function (
         chartMetadata.yColumn
       );
     case ChartType.LineChart:
-      return processLineChartData();
+      return processLineChartData(data, chartMetadata);
     case ChartType.BarChart:
-      return processBarChartData();
+      return processBarChartData(data);
     default:
       break;
   }

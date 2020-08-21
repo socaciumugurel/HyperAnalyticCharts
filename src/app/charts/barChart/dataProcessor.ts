@@ -1,4 +1,4 @@
-export const processBarChartData = function () {
+export const processBarChartData = function (data: any[]) {
   return [
     {
       country: "AD",
