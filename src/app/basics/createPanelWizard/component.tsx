@@ -1,6 +1,5 @@
 import React from "react";
 import { Steps, Button, message, Layout, Divider } from "antd";
-import "antd/dist/antd.css";
 import DataConfiguratorContainer from "./dataConfigurator";
 import ChartConfiguratorContainer from "./chartConfigurator";
 

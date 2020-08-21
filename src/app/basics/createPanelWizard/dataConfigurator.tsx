@@ -1,6 +1,5 @@
 import React from "react";
 import { Table } from "antd";
-import "antd/dist/antd.css";
 import Search from "antd/lib/input/Search";
 import { ColumnProps } from "antd/lib/table";
 import { connect } from "react-redux";
