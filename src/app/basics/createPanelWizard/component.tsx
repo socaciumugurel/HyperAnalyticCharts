@@ -1,5 +1,5 @@
 import React from "react";
-import { Steps, Button, message } from "antd";
+import { Steps, Button, message, Layout, Divider } from "antd";
 import "antd/dist/antd.css";
 import DataConfiguratorContainer from "./dataConfigurator";
 import ChartConfiguratorContainer from "./chartConfigurator";
@@ -40,15 +40,21 @@ export class CreatePanelWizard extends React.Component<any, any> {
 
   render() {
     const { current } = this.state;
+    const { Header, Content, Footer } = Layout;
+
     return (
-      <div>
-        <Steps current={current}>
+      <Layout style={{ height: "100%" }}>
+        <Steps current={current} style={{ padding: 50 }}>
           {steps.map((item) => (
             <Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        <div className="steps-content">{steps[current].content}</div>
-        <div className="steps-action">
+        <div style={{ margin: "auto" }}>
+          {current > 0 && (
+            <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+              Previous
+            </Button>
+          )}
           {current < steps.length - 1 && (
             <Button type="primary" onClick={() => this.next()}>
               Next
@@ -62,13 +68,12 @@ export class CreatePanelWizard extends React.Component<any, any> {
               Done
             </Button>
           )}
-          {current > 0 && (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
-              Previous
-            </Button>
-          )}
         </div>
-      </div>
+        <Divider />
+        <Content style={{ padding: 10 }}>{steps[current].content}</Content>
+        <Divider />
+        <Footer></Footer>
+      </Layout>
     );
   }
 }

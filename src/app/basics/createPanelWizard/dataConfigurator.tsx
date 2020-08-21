@@ -19,17 +19,17 @@ export class DataConfigurator extends React.Component<any, any> {
 
   getColumns(data: any) {
     const uniqueKeys = Object.keys(
-      data.reduce(function(acumulator: any, obj: any) {
+      data.reduce(function (acumulator: any, obj: any) {
         return Object.assign(acumulator, obj);
       }, {})
     );
 
-    return uniqueKeys.map(key => {
+    return uniqueKeys.map((key) => {
       return {
         title: key,
         width: 100,
         dataIndex: key,
-        key: key
+        key: key,
       };
     });
   }
@@ -39,21 +39,22 @@ export class DataConfigurator extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="dataSourcePanel">
+      <div>
         <Search
           defaultValue="http://my-json-server.typicode.com/socaciumugurel/mockData/people"
           placeholder="API Connection URL"
           enterButton="Get data"
           size="large"
+          style={{ width: "50%", float: "right" }}
           onSearch={(value: any) => {
             this.getDataPromise({ url: "/mockData/people.json" })
-              .then(res => res.json())
+              .then((res) => res.json())
               .then(
-                data => {
+                (data) => {
                   const columns = this.getColumns(data);
                   this.props.saveData({ columns, data });
                 },
-                error => {}
+                (error) => {}
               )
               .then(() => this.setState({ displayTable: true }));
           }}
@@ -62,6 +63,7 @@ export class DataConfigurator extends React.Component<any, any> {
         <br />
         {this.state.displayTable ? (
           <Table
+            style={{ paddingTop: 50 }}
             columns={this.props.columns as ColumnProps<any>[]}
             dataSource={this.props.data}
             scroll={{ x: 1500, y: 300 }}
@@ -75,13 +77,13 @@ export class DataConfigurator extends React.Component<any, any> {
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
     data: state.dynamicTable.data,
-    columns: state.dynamicTable.columns
+    columns: state.dynamicTable.columns,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    saveData: (value: DynamicTableData) => dispatch(saveData(value))
+    saveData: (value: DynamicTableData) => dispatch(saveData(value)),
   };
 };
 
