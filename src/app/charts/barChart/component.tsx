@@ -1,71 +1,101 @@
 import React from "react";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-
-const dummyData = [
-  {
-    name: "First",
-    data: [1, 2, 3]
-  },
-  {
-    name: "Second",
-    data: [1, 2, 3]
-  }
-];
+import { ResponsiveBar } from "@nivo/bar";
 
 export class BarChart extends React.Component<any, any> {
   render() {
-    const options: Highcharts.Options = {
-      chart: {
-        type: "column"
-      },
-      title: {
-        text: "Monthly Average Rainfall"
-      },
-      subtitle: {
-        text: "Source: WorldClimate.com"
-      },
-      xAxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec"
-        ],
-        crosshair: true
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: "Rainfall (mm)"
-        }
-      },
-      tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat:
-          '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: "</table>",
-        shared: true,
-        useHTML: true
-      },
-      plotOptions: {
-        column: {
-          pointPadding: 0.2,
-          borderWidth: 0
-        }
-      }
-    };
-    options.series = this.props.series == null ? dummyData : this.props.series;
-
-    return <HighchartsReact highcharts={Highcharts} options={options} />;
+    debugger;
+    return (
+      <ResponsiveBar
+        data={this.props.series}
+        keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
+        indexBy="country"
+        margin={{ top: 50, right: 130, bottom: 100, left: 60 }}
+        padding={0.3}
+        colors={{ scheme: "nivo" }}
+        defs={[
+          {
+            id: "dots",
+            type: "patternDots",
+            background: "inherit",
+            color: "#38bcb2",
+            size: 4,
+            padding: 1,
+            stagger: true,
+          },
+          {
+            id: "lines",
+            type: "patternLines",
+            background: "inherit",
+            color: "#eed312",
+            rotation: -45,
+            lineWidth: 6,
+            spacing: 10,
+          },
+        ]}
+        fill={[
+          {
+            match: {
+              id: "fries",
+            },
+            id: "dots",
+          },
+          {
+            match: {
+              id: "sandwich",
+            },
+            id: "lines",
+          },
+        ]}
+        borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        axisTop={null}
+        axisRight={null}
+        axisBottom={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "country",
+          legendPosition: "middle",
+          legendOffset: 32,
+        }}
+        axisLeft={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "food",
+          legendPosition: "middle",
+          legendOffset: -40,
+        }}
+        labelSkipWidth={12}
+        labelSkipHeight={12}
+        labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+        legends={[
+          {
+            dataFrom: "keys",
+            anchor: "bottom-right",
+            direction: "column",
+            justify: false,
+            translateX: 120,
+            translateY: 0,
+            itemsSpacing: 2,
+            itemWidth: 100,
+            itemHeight: 20,
+            itemDirection: "left-to-right",
+            itemOpacity: 0.85,
+            symbolSize: 20,
+            effects: [
+              {
+                on: "hover",
+                style: {
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
+        ]}
+        animate={true}
+        motionStiffness={90}
+        motionDamping={15}
+      />
+    );
   }
 }
