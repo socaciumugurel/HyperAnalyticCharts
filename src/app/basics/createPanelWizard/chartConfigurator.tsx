@@ -2,13 +2,10 @@ import React from "react";
 import { getComponent } from "../../utils";
 import { Select, Button } from "antd";
 import { connect } from "react-redux";
-<<<<<<< HEAD
 import { processPieChartData } from "../../charts/pieChart/dataProcessor";
 import { ChartType } from "../../charts/charts";
 import { processLineChartData } from "../../charts/lineChart/dataProcessor";
 import { processBarChartData } from "../../charts/barChart/dataProcessor";
-=======
->>>>>>> layout
 
 export class ChartConfigurator extends React.Component<any, any> {
   constructor(props: any) {
