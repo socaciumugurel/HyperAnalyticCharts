@@ -14,6 +14,7 @@ import { ChartType } from "./charts/charts";
 export const getComponent = (
   chartType: string,
   series: any,
+  configurations: any,
   toggleCreatePanelWizard: any
 ) => {
   let component = {};
@@ -22,7 +23,7 @@ export const getComponent = (
       component = <LineChart series={series} />;
       break;
     case ChartType.PieChart:
-      component = <PieChart series={series} />;
+      component = <PieChart series={series} configurations={configurations} />;
       break;
     case ChartType.BarChart:
       component = <BarChart series={series} />;

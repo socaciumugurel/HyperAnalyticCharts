@@ -33,6 +33,7 @@ export class Panel extends React.Component<any, any> {
     const component = getComponent(
       this.props.chartType,
       this.state.series,
+      null,
       this.props.toggleCreatePanelWizard
     );
 

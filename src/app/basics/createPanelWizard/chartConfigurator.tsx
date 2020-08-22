@@ -1,11 +1,11 @@
 import React from "react";
-import { getComponent } from "../../utils";
-import { Select, Button } from "antd";
+import { Select, Button, Slider } from "antd";
 import { connect } from "react-redux";
 import { processPieChartData } from "../../charts/pieChart/dataProcessor";
 import { ChartType } from "../../charts/charts";
 import { processLineChartData } from "../../charts/lineChart/dataProcessor";
 import { processBarChartData } from "../../charts/barChart/dataProcessor";
+import { PieChartConfigurator } from "../../charts/pieChart/configurator";
 
 export class ChartConfigurator extends React.Component<any, any> {
   constructor(props: any) {
@@ -42,6 +42,13 @@ export class ChartConfigurator extends React.Component<any, any> {
             {this.selectAxis("Select data for Y", "yColumn")}
           </div>
         );
+    }
+  }
+
+  getConfigurator(chartType: string, series: any) {
+    switch (chartType) {
+      case ChartType.PieChart:
+        return <PieChartConfigurator series={series} />;
     }
   }
 
@@ -99,14 +106,12 @@ export class ChartConfigurator extends React.Component<any, any> {
           Refresh Chart
         </Button>
         <div> {this.getConfigurations(this.state.selectedType)}</div>
-        <div className="panel">
-          {getComponent(
+        <div>
+          {this.getConfigurator(
             this.state.selectedType,
-            this.state.processedData,
-            null
+            this.state.processedData
           )}
         </div>
-        <div className="panel">---configurator---</div>
       </div>
     );
   }

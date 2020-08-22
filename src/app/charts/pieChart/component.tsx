@@ -26,6 +26,7 @@ export class PieChart extends React.Component<any, any> {
         animate={true}
         motionStiffness={90}
         motionDamping={15}
+        {...this.props.configurations}
         defs={[
           {
             id: "dots",
