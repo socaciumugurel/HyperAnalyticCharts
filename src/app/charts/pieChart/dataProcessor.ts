@@ -1,8 +1,10 @@
+import { PieDatum } from "@nivo/pie";
+
 export const processPieChartData = function (
   data: any[],
   xColumn: string,
   yColumn: string
-) {
+): PieDatum[] {
   var groupBy = function (data: any, key: string, key2: string) {
     return data.reduce(function (accumulator: any, item: any) {
       (accumulator[item[key]] = accumulator[item[key]] || {

@@ -22,9 +22,9 @@ export const getComponent = (
     case ChartType.LineChart:
       component = <LineChart series={series} />;
       break;
-    case ChartType.PieChart:
-      component = <PieChart series={series} configurations={configurations} />;
-      break;
+    // case ChartType.PieChart:
+    //   component = <PieChart {...configurations} />;
+    //   break;
     case ChartType.BarChart:
       component = <BarChart series={series} />;
       break;
