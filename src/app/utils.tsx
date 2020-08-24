@@ -10,11 +10,11 @@ import { AddNew } from "./basics/addNew/component";
 
 import React from "react";
 import { ChartType } from "./charts/charts";
+import { defaultPieChartConfig } from "./charts/pieChart/configurator";
 
 export const getComponent = (
   chartType: string,
   series: any,
-  configurations: any,
   toggleCreatePanelWizard: any
 ) => {
   let component = {};
@@ -22,9 +22,11 @@ export const getComponent = (
     case ChartType.LineChart:
       component = <LineChart series={series} />;
       break;
-    // case ChartType.PieChart:
-    //   component = <PieChart {...configurations} />;
-    //   break;
+    case ChartType.PieChart:
+      const config = defaultPieChartConfig;
+      config.data = series;
+      component = <PieChart {...config} />;
+      break;
     case ChartType.BarChart:
       component = <BarChart series={series} />;
       break;
