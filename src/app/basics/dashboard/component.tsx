@@ -4,15 +4,11 @@ import { CreatePanelWizard } from "../createPanelWizard/component";
 
 export class Dashboard extends React.Component<any> {
   render() {
-    var chartComponents = this.props.panels.map(function(panel: any) {
+    var chartComponents = this.props.panels.map(function (panel: any) {
       return <PanelContainer id={panel.id} key={panel.id} />;
     });
-
-    return (
-      <div>
-        {this.props.isWizardVisible && <CreatePanelWizard />}
-        {!this.props.isWizardVisible && chartComponents}
-      </div>
-    );
+    if (this.props.isWizardVisible) {
+      return <CreatePanelWizard />;
+    } else return <div>{chartComponents}</div>;
   }
 }

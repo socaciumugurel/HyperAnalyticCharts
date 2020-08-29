@@ -5,11 +5,7 @@ import "./styling/createPanelWizard.css";
 import DashboardContainer from "./app/basics/dashboard/container";
 
 function App() {
-  return (
-    <div>
-      <DashboardContainer />
-    </div>
-  );
+  return <DashboardContainer />;
 }
 
 export default App;

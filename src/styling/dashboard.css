@@ -1,14 +1,23 @@
 .panel {
-  padding: 0 3%;
+  padding: 3% 3%;
   width: 50%;
   float: left;
   margin: auto;
-  border: 1px solid #f9f9f9;
-  border-radius: 6px;
-  box-shadow: 1px 1px 5px #cacaca;
   text-align: center;
   position: relative;
   height: 500px;
+}
+
+.config-panel {
+  position: relative;
+  float: left;
+  margin: auto;
+  padding: 3% 3%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
+  width: 30%;
+  text-align: inherit;
 }
 
 .add-new-icon {

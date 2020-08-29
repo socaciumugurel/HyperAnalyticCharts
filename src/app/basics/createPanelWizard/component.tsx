@@ -43,7 +43,7 @@ export class CreatePanelWizard extends React.Component<any, any> {
 
     return (
       <Layout style={{ height: "100%" }}>
-        <Steps current={current} style={{ padding: 50 }}>
+        <Steps current={current} style={{ padding: 10 }}>
           {steps.map((item) => (
             <Step key={item.title} title={item.title} />
           ))}
@@ -68,10 +68,8 @@ export class CreatePanelWizard extends React.Component<any, any> {
             </Button>
           )}
         </div>
-        <Divider />
         <Content style={{ padding: 10 }}>{steps[current].content}</Content>
         <Divider />
-        <Footer></Footer>
       </Layout>
     );
   }

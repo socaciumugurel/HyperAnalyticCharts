@@ -24,8 +24,7 @@ export const getComponent = (
       break;
     case ChartType.PieChart:
       const config = defaultPieChartConfig;
-      config.data = series;
-      component = <PieChart {...config} />;
+      component = <PieChart {...config} data={series} />;
       break;
     case ChartType.BarChart:
       component = <BarChart series={series} />;
