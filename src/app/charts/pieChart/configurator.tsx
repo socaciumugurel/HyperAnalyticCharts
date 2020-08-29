@@ -6,7 +6,7 @@ import { PieChart } from "./component";
 
 export const defaultPieChartConfig: CommonPieProps = {
   margin: { top: 40, right: 80, bottom: 100, left: 80 },
-  innerRadius: 0.5,
+  innerRadius: 0,
   padAngle: 0.7,
   cornerRadius: 0,
   colors: { scheme: "nivo" },
@@ -21,6 +21,7 @@ export const defaultPieChartConfig: CommonPieProps = {
   radialLabelsLinkHorizontalLength: 24,
   radialLabelsLinkStrokeWidth: 1,
   radialLabelsLinkColor: { from: "color" },
+  enableSlicesLabels: true,
   slicesLabelsSkipAngle: 10,
   slicesLabelsTextColor: "#333333",
   animate: true,
@@ -96,6 +97,40 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
     this.setState({ radialLabelsSkipAngle: value as number });
   };
 
+  handleRadialLabelsTextXOffsetChange = (
+    value: SliderValue | number | undefined
+  ) => {
+    this.setState({ radialLabelsTextXOffset: value as number });
+  };
+
+  handleRadialLabelsLinkOffsetChange = (
+    value: SliderValue | number | undefined
+  ) => {
+    this.setState({ radialLabelsLinkOffset: value as number });
+  };
+
+  handleRadialLabelsLinkDiagonalLengthChange = (
+    value: SliderValue | number | undefined
+  ) => {
+    this.setState({ radialLabelsLinkDiagonalLength: value as number });
+  };
+
+  handleRadialLabelsLinkHorizontalLengthChange = (
+    value: SliderValue | number | undefined
+  ) => {
+    this.setState({ radialLabelsLinkHorizontalLength: value as number });
+  };
+
+  handleEnableSlicesLabelsChange = (value: boolean | undefined) => {
+    this.setState({ enableSlicesLabels: value });
+  };
+
+  handleSlicesLabelsSkipAngleChange = (
+    value: SliderValue | number | undefined
+  ) => {
+    this.setState({ slicesLabelsSkipAngle: value as number });
+  };
+
   render() {
     return (
       <div>
@@ -111,7 +146,6 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
                 value={this.state.innerRadius}
                 max={0.95}
                 step={0.05}
-                defaultValue={0.45}
               ></Slider>
             </Col>
             <Col span={7}>
@@ -255,6 +289,120 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
                 step={1}
                 value={this.state.radialLabelsSkipAngle}
                 onChange={this.handleRadialLabelSkipAngleChange}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <h4>radialLabelsTextXOffset</h4>
+            <Col span={17}>
+              <Slider
+                onChange={this.handleRadialLabelsTextXOffsetChange}
+                value={this.state.radialLabelsTextXOffset}
+                max={45}
+                step={1}
+                defaultValue={0}
+              ></Slider>
+            </Col>
+            <Col span={7}>
+              <InputNumber
+                min={0}
+                max={45}
+                step={1}
+                value={this.state.radialLabelsTextXOffset}
+                onChange={this.handleRadialLabelsTextXOffsetChange}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <h4>radialLabelsLinkOffset</h4>
+            <Col span={17}>
+              <Slider
+                onChange={this.handleRadialLabelsLinkOffsetChange}
+                value={this.state.radialLabelsLinkOffset}
+                max={45}
+                step={1}
+                defaultValue={0}
+              ></Slider>
+            </Col>
+            <Col span={7}>
+              <InputNumber
+                min={0}
+                max={45}
+                step={1}
+                value={this.state.radialLabelsLinkOffset}
+                onChange={this.handleRadialLabelsLinkOffsetChange}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <h4>radialLabelsLinkOffset</h4>
+            <Col span={17}>
+              <Slider
+                onChange={this.handleRadialLabelsLinkDiagonalLengthChange}
+                value={this.state.radialLabelsLinkDiagonalLength}
+                max={45}
+                step={1}
+                defaultValue={0}
+              ></Slider>
+            </Col>
+            <Col span={7}>
+              <InputNumber
+                min={0}
+                max={45}
+                step={1}
+                value={this.state.radialLabelsLinkDiagonalLength}
+                onChange={this.handleRadialLabelsLinkDiagonalLengthChange}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <h4>radialLabelsLinkHorizontalLength</h4>
+            <Col span={17}>
+              <Slider
+                onChange={this.handleRadialLabelsLinkHorizontalLengthChange}
+                value={this.state.radialLabelsLinkHorizontalLength}
+                max={45}
+                step={1}
+                defaultValue={0}
+              ></Slider>
+            </Col>
+            <Col span={7}>
+              <InputNumber
+                min={0}
+                max={45}
+                step={1}
+                value={this.state.radialLabelsLinkHorizontalLength}
+                onChange={this.handleRadialLabelsLinkHorizontalLengthChange}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <h4>enableSlicesLabels</h4>
+            <Col span={4}>
+              <Switch
+                onChange={this.handleEnableSlicesLabelsChange}
+                defaultChecked
+              />
+            </Col>
+          </Row>
+          <Row>
+            <h4>slicesLabelsSkipAngle</h4>
+            <Col span={17}>
+              <Slider
+                onChange={this.handleSlicesLabelsSkipAngleChange}
+                value={this.state.slicesLabelsSkipAngle}
+                max={45}
+                step={1}
+                defaultValue={0}
+              ></Slider>
+            </Col>
+            <Col span={7}>
+              <InputNumber
+                min={0}
+                max={45}
+                step={1}
+                value={this.state.slicesLabelsSkipAngle}
+                onChange={this.handleSlicesLabelsSkipAngleChange}
               />
             </Col>
           </Row>
