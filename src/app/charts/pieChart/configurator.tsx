@@ -138,6 +138,7 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
           <PieChart {...this.state} data={this.props.series} />
         </div>
         <div className="config-panel">
+          <h1>Configurations</h1>
           <Row>
             <h4>innerRadius</h4>
             <Col span={17}>
@@ -376,6 +377,7 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
               />
             </Col>
           </Row>
+          <Divider />
           <Row>
             <h4>enableSlicesLabels</h4>
             <Col span={4}>

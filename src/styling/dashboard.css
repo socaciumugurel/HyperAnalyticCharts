@@ -18,6 +18,7 @@
   height: 500px;
   width: 30%;
   text-align: inherit;
+  direction: ltr;
 }
 
 .add-new-icon {
@@ -28,6 +29,26 @@
 
 .add-new-icon:hover {
   color: black;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #464646;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-track:hover {
+  background: #e1e1e1;
 }
 
 @media only screen and (max-width: 900px) {
