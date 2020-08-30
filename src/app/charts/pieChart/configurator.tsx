@@ -134,7 +134,10 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
   render() {
     return (
       <div>
-        <div className="panel" style={{ width: "60%", padding: 0 }}>
+        <div
+          className="panel"
+          style={{ height: 500, width: "60%", padding: 0 }}
+        >
           <PieChart {...this.state} data={this.props.series} />
         </div>
         <div className="config-panel">

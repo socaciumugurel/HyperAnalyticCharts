@@ -65,7 +65,7 @@ export class DataConfigurator extends React.Component<any, any> {
             style={{ paddingTop: 50 }}
             columns={this.props.columns as ColumnProps<any>[]}
             dataSource={this.props.data}
-            scroll={{ x: 1500, y: 300 }}
+            scroll={{ x: 1500, y: 600 }}
           />
         ) : null}
       </div>

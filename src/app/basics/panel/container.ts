@@ -3,7 +3,7 @@ import { Panel } from "./component";
 import { toggleCreatePanelWizard } from "../createPanelWizard/actions";
 
 const mapStateToProps = (state: any, ownProps: any) => {
-  const panel = state.dashboardReducer.find(
+  const panel = state.dashboardReducer.panels.find(
     (panel: any) => panel.id === ownProps.id
   );
   const { title, chartType, dataApi, config } = panel;
@@ -11,14 +11,14 @@ const mapStateToProps = (state: any, ownProps: any) => {
     title,
     chartType,
     dataApi,
-    config
+    config,
   };
 };
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleCreatePanelWizard: (value: boolean) =>
-      dispatch(toggleCreatePanelWizard(value))
+      dispatch(toggleCreatePanelWizard(value)),
   };
 };
 

@@ -3,8 +3,9 @@ import { Dashboard } from "./component";
 
 const mapStateToProps = (state: any) => {
   return {
-    panels: state.dashboardReducer,
-    isWizardVisible: state.createPanelReducer.isVisible
+    panels: state.dashboardReducer.panels,
+    layout: state.dashboardReducer.layout,
+    isWizardVisible: state.createPanelReducer.isVisible,
   };
 };
 

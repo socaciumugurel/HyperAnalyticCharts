@@ -5,7 +5,8 @@
   margin: auto;
   text-align: center;
   position: relative;
-  height: 500px;
+  height: 100%;
+  width: 100%;
 }
 
 .config-panel {
@@ -18,13 +19,12 @@
   height: 500px;
   width: 30%;
   text-align: inherit;
-  direction: ltr;
 }
 
 .add-new-icon {
   position: absolute;
-  top: 40%;
-  left: 40%;
+  top: 45%;
+  left: 45%;
 }
 
 .add-new-icon:hover {
