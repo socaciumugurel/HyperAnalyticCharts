@@ -9,6 +9,7 @@ import { PieChartConfigurator } from "../../charts/pieChart/configurator";
 import { LineCanvas } from "@nivo/line";
 import { LineChart } from "../../charts/lineChart/component";
 import { BarChart } from "../../charts/barChart/component";
+import { BarChartConfigurator } from "../../charts/barChart/configurator";
 
 export class ChartConfigurator extends React.Component<any, any> {
   constructor(props: any) {
@@ -55,7 +56,7 @@ export class ChartConfigurator extends React.Component<any, any> {
       case ChartType.LineChart:
         return <LineChart series={series} />;
       case ChartType.BarChart:
-        return <BarChart series={series} />;
+        return <BarChartConfigurator series={series} />;
     }
   }
 

@@ -33,10 +33,10 @@ const INITIAL_STATE = {
     },
   ],
   layout: [
-    { w: 5, h: 2, x: 0, y: 0, i: "2" },
-    { w: 3, h: 2, x: 5, y: 0, i: "3" },
-    { w: 5, h: 2, x: 0, y: 2, i: "4" },
-    { w: 4, h: 2, x: 5, y: 2, i: "1" },
+    { w: 3, h: 2, x: 0, y: 0, i: "2" },
+    { w: 3, h: 2, x: 3, y: 0, i: "3" },
+    { w: 3, h: 2, x: 0, y: 2, i: "4" },
+    { w: 4, h: 2, x: 3, y: 2, i: "1" },
   ],
 };
 const dashboardReducer = (state = INITIAL_STATE, _action: any) => {

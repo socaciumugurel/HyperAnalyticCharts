@@ -11,6 +11,7 @@ import { AddNew } from "./basics/addNew/component";
 import React from "react";
 import { ChartType } from "./charts/charts";
 import { defaultPieChartConfig } from "./charts/pieChart/configurator";
+import { defaultBarChartConfig } from "./charts/barChart/configurator";
 
 export const getComponent = (
   chartType: string,
@@ -27,7 +28,7 @@ export const getComponent = (
       component = <PieChart {...config} data={series} />;
       break;
     case ChartType.BarChart:
-      component = <BarChart series={series} />;
+      component = <BarChart {...defaultBarChartConfig} data={series} />;
       break;
     case ChartType.TreeMap:
       component = <TreeMap />;
