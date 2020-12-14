@@ -66,14 +66,14 @@ export class ChartConfigurator extends React.Component<any, any> {
           style={{ width: 200 }}
           placeholder="Select chart type"
           optionFilterProp="children"
-          onChange={(value: string) => {
+          onChange={(chartType: string) => {
             var series = processData(
-              value,
+              chartType,
               this.props.data,
               this.state.chartMetadata
             );
             this.setState({ processedData: series });
-            this.setState({ selectedType: value });
+            this.setState({ selectedType: chartType });
           }}
           // onFocus={onFocus}
           // onBlur={onBlur}
