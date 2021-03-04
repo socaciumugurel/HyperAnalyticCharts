@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "Connection 1",
+    "description": "Connection 1 desc",
+    "url": "/mockData/connections.json",
+    "headers": {
+      "key1": "ut dolore do aliqua Excepteur",
+      "key2": "cupidatat",
+      "key3": "et veniam commodo non in",
+      "key4": "nisi quis"
+    },
+    "queryParams": {
+      "key1": "exercitation elit dolore labore dolor",
+      "key2": "do adipisicing nisi",
+      "key3": "ex",
+      "key4": "dolor proident Lorem ullamco"
+    }
+  },
+  {
+    "id": "2",
+    "name": "Connection 2",
+    "description": "Connection 2 desc",
+    "url": "/mockData/people.json",
+    "headers": {
+      "key1": "ut dolore do aliqua Excepteur",
+      "key2": "cupidatat",
+      "key3": "et veniam commodo non in",
+      "key4": "nisi quis"
+    },
+    "queryParams": {
+      "key1": "exercitation elit dolore labore dolor",
+      "key2": "do adipisicing nisi",
+      "key3": "ex",
+      "key4": "dolor proident Lorem ullamco"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Connection 3",
+    "description": "Connection 3 desc",
+    "url": "/mockData/connections.json",
+    "headers": {
+      "key1": "ut dolore do aliqua Excepteur",
+      "key2": "cupidatat",
+      "key3": "et veniam commodo non in",
+      "key4": "nisi quis"
+    },
+    "queryParams": {
+      "key1": "exercitation elit dolore labore dolor",
+      "key2": "do adipisicing nisi",
+      "key3": "ex",
+      "key4": "dolor proident Lorem ullamco"
+    }
+  },
+  {
+    "id": "4",
+    "name": "Connection 4",
+    "description": "Connection 4 desc",
+    "url": "/mockData/connections.json",
+    "headers": {
+      "key1": "ut dolore do aliqua Excepteur",
+      "key2": "cupidatat",
+      "key3": "et veniam commodo non in",
+      "key4": "nisi quis"
+    },
+    "queryParams": {
+      "key1": "exercitation elit dolore labore dolor",
+      "key2": "do adipisicing nisi",
+      "key3": "ex",
+      "key4": "dolor proident Lorem ullamco"
+    }
+  }
+]

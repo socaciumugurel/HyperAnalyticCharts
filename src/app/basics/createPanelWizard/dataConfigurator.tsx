@@ -3,8 +3,9 @@ import { Table } from "antd";
 import Search from "antd/lib/input/Search";
 import { ColumnProps } from "antd/lib/table";
 import { connect } from "react-redux";
-import { saveData } from "../createPanelWizard/actions";
+import { loadData } from "../createPanelWizard/actions";
 import { DynamicTableData } from "./models";
+import { getColumns } from "../utils/dataUtils";
 
 interface ConnectionSettings {
   url: string;
@@ -14,26 +15,6 @@ export class DataConfigurator extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = { displayTable: false };
-  }
-
-  getColumns(data: any) {
-    const uniqueKeys = Object.keys(
-      data.reduce(function (acumulator: any, obj: any) {
-        return Object.assign(acumulator, obj);
-      }, {})
-    );
-
-    return uniqueKeys.map((key) => {
-      return {
-        title: key,
-        width: 100,
-        dataIndex: key,
-        key: key,
-      };
-    });
-  }
-  getDataPromise(connectionSettings: ConnectionSettings) {
-    return fetch(connectionSettings.url, {});
   }
 
   render() {
@@ -46,15 +27,8 @@ export class DataConfigurator extends React.Component<any, any> {
           size="large"
           style={{ width: "50%", float: "right" }}
           onSearch={(value: any) => {
-            this.getDataPromise({ url: "/mockData/people.json" })
-              .then((res) => res.json())
-              .then(
-                (data) => {
-                  const columns = this.getColumns(data);
-                  this.props.saveData({ columns, data });
-                },
-                (error) => {}
-              )
+            this.props
+              .loadData("/mockData/people.json")
               .then(() => this.setState({ displayTable: true }));
           }}
         />
@@ -80,10 +54,8 @@ const mapStateToProps = (state: any, ownProps: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    saveData: (value: DynamicTableData) => dispatch(saveData(value)),
-  };
+const mapDispatchToProps = {
+  loadData,
 };
 
 const DataConfiguratorContainer = connect(

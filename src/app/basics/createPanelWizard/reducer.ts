@@ -1,10 +1,11 @@
 import { toggleCreatePanelWizard, saveData } from "./actions";
 import { getType } from "typesafe-actions";
+import { getColumns } from "../utils/dataUtils";
 
 const INITIAL_STATE = {
   isVisible: false,
   columns: "",
-  data: ""
+  data: "",
 };
 export const createPanelReducer = (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
@@ -13,7 +14,7 @@ export const createPanelReducer = (state = INITIAL_STATE, action: any) => {
         state,
         isVisible: action.payload,
         columns: "",
-        data: ""
+        data: "",
       };
     default:
       return state;
@@ -29,7 +30,7 @@ export const dynamicTable = (
       return {
         ...state,
         data: action.payload.data,
-        columns: action.payload.columns
+        columns: action.payload.columns,
       };
     default:
       return state;

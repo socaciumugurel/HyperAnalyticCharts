@@ -3,7 +3,7 @@ import { Panel } from "./component";
 import { toggleCreatePanelWizard } from "../createPanelWizard/actions";
 
 const mapStateToProps = (state: any, ownProps: any) => {
-  const panel = state.dashboardReducer.panels.find(
+  const panel = state.dashboard.panels.find(
     (panel: any) => panel.id === ownProps.id
   );
   const { title, chartType, dataApi, config } = panel;

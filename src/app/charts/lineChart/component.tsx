@@ -14,7 +14,7 @@ export class LineChart extends React.Component<any, any> {
       <div>
         <div
           className="panel"
-          style={{ height: 500, width: "60%", padding: 0 }}
+          style={{ height: 500, width: "100%", padding: 0 }}
         >
           <ResponsiveLine
             data={this.props.series}
