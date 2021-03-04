@@ -14,6 +14,8 @@ Create your own custom dashboard that helps you visualize big data through profe
 2. go to the cloned folder and run <b>npm install</b>
 2. <b>npm start</b>
 
+
 <h2>Local development</h2>
+
 1. http://localhost:3000/ - app
 2. http://localhost:3001/ - local json-server
