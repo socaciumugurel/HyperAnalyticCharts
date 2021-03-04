@@ -15,7 +15,7 @@ const DataConnections = (props: any) => {
 
   useEffect(() => {
     if (connections.length === 0) {
-      props.loadConnections("/mockData/connections.json");
+      props.loadConnections("http://localhost:3001/connections");
     }
   });
   const handleChange = (connectionUrl: string) => {

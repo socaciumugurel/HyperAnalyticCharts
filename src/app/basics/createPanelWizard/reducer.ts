@@ -1,6 +1,5 @@
 import { toggleCreatePanelWizard, saveData } from "./actions";
 import { getType } from "typesafe-actions";
-import { getColumns } from "../utils/dataUtils";
 
 const INITIAL_STATE = {
   isVisible: false,
