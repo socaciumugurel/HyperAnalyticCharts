@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Select, Button } from "antd";
+import { Select, Button, Form } from "antd";
 import { loadConnections } from "../../redux/actions/dataConnectionActions";
 import { loadData } from "../createPanelWizard/actions";
 import { connect } from "react-redux";
@@ -10,23 +10,31 @@ import Table, { ColumnProps } from "antd/lib/table";
 const DataConnections = (props: any) => {
   const { Option } = Select;
   const { connections } = props;
-  const [selectedConnectionId, setSelectedConnectionId] = useState<string>();
+  const [
+    selectedConnection,
+    setSelectedConnection,
+  ] = useState<DataConnection>();
   const [displayTable, setDisplayTable] = useState(false);
+  const [displayDetails, setDisplayDetails] = useState(false);
 
   useEffect(() => {
     if (connections.length === 0) {
       props.loadConnections("http://localhost:3001/connections");
     }
-  });
-  const handleChange = (connectionUrl: string) => {
-    setSelectedConnectionId(connectionUrl);
+  }, []);
+  const handleChange = (connectionId: string) => {
+    var selectedConnection = connections.find(
+      (con: DataConnection) => con.id === connectionId
+    );
+    setSelectedConnection(selectedConnection);
   };
 
   const handleClick = (e: any) => {
     e.preventDefault();
-    const connectionUrl = connections.find((con: DataConnection) => {
-      return con.id === selectedConnectionId;
-    }).url;
+    if (!selectedConnection) {
+      return;
+    }
+    const connectionUrl = selectedConnection.url;
     props.loadData(connectionUrl).then(() => setDisplayTable(true));
   };
 
@@ -56,6 +64,9 @@ const DataConnections = (props: any) => {
       >
         Load Data
       </Button>
+      <br />
+      <br />
+      <Form></Form>
       <br />
       <br />
       {displayTable ? (
