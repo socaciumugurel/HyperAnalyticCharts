@@ -99,7 +99,7 @@ export class ChartConfigurator extends React.Component<any, any> {
         </Select>
         <Button
           type="primary"
-          size={"default"}
+          size={"middle"}
           onClick={() => {
             {
               var series = processData(

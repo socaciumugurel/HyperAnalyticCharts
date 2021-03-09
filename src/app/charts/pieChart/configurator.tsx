@@ -1,7 +1,6 @@
 import React from "react";
 import { CommonPieProps } from "@nivo/pie";
 import { Slider, Row, Col, InputNumber, Divider, Switch } from "antd";
-import { SliderValue } from "antd/lib/slider";
 import { PieChart } from "./component";
 
 export const defaultPieChartConfig: CommonPieProps = {
@@ -55,15 +54,15 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
     this.state = defaultPieChartConfig;
   }
 
-  handleInnerRadiusChange = (value: SliderValue | number | undefined) => {
+  handleInnerRadiusChange = (value: number | undefined) => {
     this.setState({ innerRadius: value as number });
   };
 
-  handlePadAngleChange = (value: SliderValue | number | undefined) => {
+  handlePadAngleChange = (value: number | undefined) => {
     this.setState({ padAngle: value as number });
   };
 
-  handleCornerRadiusChange = (value: SliderValue | number | undefined) => {
+  handleCornerRadiusChange = (value: number | undefined) => {
     this.setState({ cornerRadius: value as number });
   };
 
@@ -83,7 +82,7 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
     this.setState({ margin: { ...this.state.margin, left: value } });
   };
 
-  handleBorderWidthChange = (value: SliderValue | number | undefined) => {
+  handleBorderWidthChange = (value: number | undefined) => {
     this.setState({ borderWidth: value as number });
   };
 
@@ -91,32 +90,24 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
     this.setState({ enableRadialLabels: value });
   };
 
-  handleRadialLabelSkipAngleChange = (
-    value: SliderValue | number | undefined
-  ) => {
+  handleRadialLabelSkipAngleChange = (value: number | undefined) => {
     this.setState({ radialLabelsSkipAngle: value as number });
   };
 
-  handleRadialLabelsTextXOffsetChange = (
-    value: SliderValue | number | undefined
-  ) => {
+  handleRadialLabelsTextXOffsetChange = (value: number | undefined) => {
     this.setState({ radialLabelsTextXOffset: value as number });
   };
 
-  handleRadialLabelsLinkOffsetChange = (
-    value: SliderValue | number | undefined
-  ) => {
+  handleRadialLabelsLinkOffsetChange = (value: number | undefined) => {
     this.setState({ radialLabelsLinkOffset: value as number });
   };
 
-  handleRadialLabelsLinkDiagonalLengthChange = (
-    value: SliderValue | number | undefined
-  ) => {
+  handleRadialLabelsLinkDiagonalLengthChange = (value: number | undefined) => {
     this.setState({ radialLabelsLinkDiagonalLength: value as number });
   };
 
   handleRadialLabelsLinkHorizontalLengthChange = (
-    value: SliderValue | number | undefined
+    value: number | undefined
   ) => {
     this.setState({ radialLabelsLinkHorizontalLength: value as number });
   };
@@ -125,9 +116,7 @@ export class PieChartConfigurator extends React.Component<any, CommonPieProps> {
     this.setState({ enableSlicesLabels: value });
   };
 
-  handleSlicesLabelsSkipAngleChange = (
-    value: SliderValue | number | undefined
-  ) => {
+  handleSlicesLabelsSkipAngleChange = (value: number | undefined) => {
     this.setState({ slicesLabelsSkipAngle: value as number });
   };
 

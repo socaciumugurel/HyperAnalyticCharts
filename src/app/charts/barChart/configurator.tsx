@@ -1,7 +1,6 @@
 import React from "react";
 import { BarProps, BarSvgProps, BarDatum } from "@nivo/bar";
 import { Slider, Row, Col, InputNumber, Divider, Switch } from "antd";
-import { SliderValue } from "antd/lib/slider";
 import { BarChart } from "./component";
 
 export const defaultBarChartConfig: BarProps = {
@@ -64,7 +63,7 @@ export class BarChartConfigurator extends React.Component<any, BarProps> {
     this.state = defaultBarChartConfig;
   }
 
-  handleInnerPadding = (value: SliderValue | number | undefined) => {
+  handleInnerPadding = (value: number | undefined) => {
     this.setState({ innerPadding: value as number });
   };
 

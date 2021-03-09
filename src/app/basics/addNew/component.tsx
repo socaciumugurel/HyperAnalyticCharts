@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon } from "antd";
+import { PlusCircleOutlined } from "@ant-design/icons";
 
 export class AddNew extends React.Component<any> {
   render() {
@@ -8,13 +8,12 @@ export class AddNew extends React.Component<any> {
         className="add-new-icon"
         onClick={this.props.toggleCreatePanelWizard(true)}
       >
-        <Icon
-          type="plus-circle"
+        <PlusCircleOutlined
           style={{
             fontSize: "100px",
-            color: "#bbbbbb"
+            color: "#bbbbbb",
           }}
-        ></Icon>
+        />
       </div>
     );
   }

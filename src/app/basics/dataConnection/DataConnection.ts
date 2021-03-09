@@ -1,5 +1,5 @@
 export interface DataConnection {
-  id: string | undefined;
+  id: string;
   name: string;
   description: string;
   url: string;

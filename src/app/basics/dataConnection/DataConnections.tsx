@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Select, Button, Form } from "antd";
+import { Select, Button } from "antd";
 import { loadConnections } from "../../redux/actions/dataConnectionActions";
 import { loadData } from "../createPanelWizard/actions";
 import { connect } from "react-redux";
 import { DataConnection } from "./DataConnection";
 import Table, { ColumnProps } from "antd/lib/table";
+import DataConnectionForm from "./DataConnectionForm";
 
 const DataConnections = (props: any) => {
   const { Option } = Select;
   const { connections } = props;
-  const [
-    selectedConnection,
-    setSelectedConnection,
-  ] = useState<DataConnection>();
+  const [connectionDetails, setConnectionDetails] = useState<DataConnection>();
   const [displayTable, setDisplayTable] = useState(false);
-  const [displayDetails, setDisplayDetails] = useState(false);
 
   useEffect(() => {
     if (connections.length === 0) {
@@ -23,18 +20,18 @@ const DataConnections = (props: any) => {
     }
   }, []);
   const handleChange = (connectionId: string) => {
-    var selectedConnection = connections.find(
+    var connectionDetails = connections.find(
       (con: DataConnection) => con.id === connectionId
     );
-    setSelectedConnection(selectedConnection);
+    setConnectionDetails(connectionDetails);
   };
 
   const handleClick = (e: any) => {
     e.preventDefault();
-    if (!selectedConnection) {
+    if (!connectionDetails) {
       return;
     }
-    const connectionUrl = selectedConnection.url;
+    const connectionUrl = connectionDetails.url;
     props.loadData(connectionUrl).then(() => setDisplayTable(true));
   };
 
@@ -58,7 +55,7 @@ const DataConnections = (props: any) => {
       </Select>
       <Button
         type="primary"
-        size={"default"}
+        size="middle"
         style={{ marginLeft: 10 }}
         onClick={handleClick}
       >
@@ -66,7 +63,9 @@ const DataConnections = (props: any) => {
       </Button>
       <br />
       <br />
-      <Form></Form>
+      {connectionDetails ? (
+        <DataConnectionForm dataConnection={connectionDetails} />
+      ) : null}
       <br />
       <br />
       {displayTable ? (
