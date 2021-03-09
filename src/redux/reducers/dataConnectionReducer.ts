@@ -1,6 +1,6 @@
 import { getType } from "typesafe-actions";
+import { DataConnection } from "../../models/DataConnection";
 import { loadConnectionsSuccess } from "../actions/dataConnectionActions";
-import { DataConnection } from "../../basics/dataConnection/DataConnection";
 
 const connectionReducer = (state: DataConnection[] = [], action: any) => {
   switch (action.type) {

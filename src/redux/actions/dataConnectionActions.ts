@@ -1,5 +1,5 @@
 import { createAction } from "typesafe-actions";
-import { DataConnection } from "../../basics/dataConnection/DataConnection";
+import { DataConnection } from "../../models/DataConnection";
 
 export const loadConnectionsSuccess = createAction("LOAD_CONNECTIONS_SUCCESS")<
   DataConnection[]

@@ -1,5 +1,5 @@
 import React from "react";
-import { getComponent } from "../../utils";
+import { getComponent } from "../../utils/chartUtils";
 
 export class Panel extends React.Component<any, any> {
   constructor(props: any) {

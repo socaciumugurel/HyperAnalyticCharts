@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-import dashboards from "../app/basics/dashboard/reducer";
+import dashboards from "./dashboardReducer";
 import {
   createPanelReducer as createPanel,
   dynamicTable,
-} from "../app/basics/createPanelWizard/reducer";
-import connections from "../app/redux/reducers/dataConnectionReducer";
-import charts from "../app/redux/reducers/chartReducer";
+} from "./createPanelReducer";
+import connections from "./dataConnectionReducer";
+import charts from "./chartReducer";
 
 const rootReducer = combineReducers({
   dashboards,

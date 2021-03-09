@@ -1,6 +1,6 @@
 import { createAction } from "typesafe-actions";
-import { DynamicTableData } from "./models";
-import { getColumns } from "../utils/dataUtils";
+import { DynamicTableData } from "../../models/DynamicTableData";
+import { getColumns } from "../../utils/dataUtils";
 
 export const toggleCreatePanelWizard = createAction(
   "TOGGLE_CREATE_PANEL_WIZARD"

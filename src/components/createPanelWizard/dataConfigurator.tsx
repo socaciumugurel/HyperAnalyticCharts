@@ -3,9 +3,9 @@ import { Table } from "antd";
 import Search from "antd/lib/input/Search";
 import { ColumnProps } from "antd/lib/table";
 import { connect } from "react-redux";
-import { loadData } from "../createPanelWizard/actions";
-import { DynamicTableData } from "./models";
-import { getColumns } from "../utils/dataUtils";
+import { loadData } from "../../redux/actions/createPanelActions";
+import { DynamicTableData } from "../../models/DynamicTableData";
+import { getColumns } from "../../utils/dataUtils";
 
 interface ConnectionSettings {
   url: string;

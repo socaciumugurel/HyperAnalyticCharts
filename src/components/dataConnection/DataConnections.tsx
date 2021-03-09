@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { Select, Button } from "antd";
 import { loadConnections } from "../../redux/actions/dataConnectionActions";
-import { loadData } from "../createPanelWizard/actions";
+import { loadData } from "../../redux/actions/createPanelActions";
 import { connect } from "react-redux";
-import { DataConnection } from "./DataConnection";
+import { DataConnection } from "../../models/DataConnection";
 import Table, { ColumnProps } from "antd/lib/table";
 import DataConnectionForm from "./DataConnectionForm";
 
@@ -64,7 +64,7 @@ const DataConnections = (props: any) => {
       <br />
       <br />
       {connectionDetails ? (
-        <DataConnectionForm dataConnection={connectionDetails} />
+        <DataConnectionForm dataConnection={{ ...connectionDetails }} />
       ) : null}
       <br />
       <br />

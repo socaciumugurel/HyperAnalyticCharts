@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PanelContainer from "../panel/container";
 import { CreatePanelWizard } from "../createPanelWizard/component";
 import GridLayout from "react-grid-layout";

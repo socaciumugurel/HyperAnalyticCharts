@@ -1,4 +1,4 @@
-import { loadDashboardsSuccess } from "../../redux/actions/dashboardActions";
+import { loadDashboardsSuccess } from "../actions/dashboardActions";
 import { getType } from "typesafe-actions";
 
 const dashboardReducer = (state = [] as any[], action: any) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Steps, Button, message, Layout, Divider } from "antd";
 import DataConfiguratorContainer from "./dataConfigurator";
-import ChartConfiguratorContainer from "./chartConfigurator";
+import ChartConfigurator from "./ChartConfigurator";
 
 const { Step } = Steps;
 const steps = [
@@ -11,7 +11,7 @@ const steps = [
   },
   {
     title: "Select chart type: ",
-    content: <ChartConfiguratorContainer />,
+    content: <ChartConfigurator />,
   },
   {
     title: "Last",

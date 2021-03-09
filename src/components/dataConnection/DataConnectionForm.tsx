@@ -1,7 +1,6 @@
 import { Button, Form, Input, Select } from "antd";
-import { url } from "inspector";
 import React, { useState } from "react";
-import { DataConnection } from "./DataConnection";
+import { DataConnection } from "../../models/DataConnection";
 
 const DataConnectionForm = (props: { dataConnection: DataConnection }) => {
   const { dataConnection } = props;

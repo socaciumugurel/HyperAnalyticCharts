@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { Panel } from "./component";
-import { toggleCreatePanelWizard } from "../createPanelWizard/actions";
+import { toggleCreatePanelWizard } from "../../redux/actions/createPanelActions";
 
 const mapStateToProps = (state: any, ownProps: any) => {
   const panel = state.charts.find((chart: any) => chart.id === ownProps.id);

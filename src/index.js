@@ -10,7 +10,7 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose } from "redux";
 import App from "./App";
-import rootReducer from "./reducers/rootReducer";
+import rootReducer from "./redux/reducers/rootReducer";
 import { register } from "./serviceWorker";
 
 const middleware = applyMiddleware(thunk, logger);

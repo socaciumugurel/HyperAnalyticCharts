@@ -1,17 +1,17 @@
-import { LineChart } from "./charts/lineChart/component";
+import { LineChart } from "../components/charts/lineChart/component";
 
-import { PieChart } from "./charts/pieChart/component";
+import { PieChart } from "../components/charts/pieChart/component";
 
-import { BarChart } from "./charts/barChart/component";
+import { BarChart } from "../components/charts/barChart/component";
 
-import { TreeMap } from "./charts/treeMap/component";
+import { TreeMap } from "../components/charts/treeMap/component";
 
-import { AddNew } from "./basics/addNew/component";
+import { AddNew } from "../components/addNew/component";
 
 import React from "react";
-import { ChartType } from "./charts/charts";
-import { defaultPieChartConfig } from "./charts/pieChart/configurator";
-import { defaultBarChartConfig } from "./charts/barChart/configurator";
+import { ChartType } from "../components/charts/charts";
+import { defaultPieChartConfig } from "../components/charts/pieChart/configurator";
+import { defaultBarChartConfig } from "../components/charts/barChart/configurator";
 
 export const getComponent = (
   chartType: string,

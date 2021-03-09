@@ -1,4 +1,7 @@
-import { toggleCreatePanelWizard, saveData } from "./actions";
+import {
+  toggleCreatePanelWizard,
+  saveData,
+} from "../actions/createPanelActions";
 import { getType } from "typesafe-actions";
 
 const INITIAL_STATE = {
