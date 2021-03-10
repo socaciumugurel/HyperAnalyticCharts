@@ -1,17 +1,13 @@
-import { LineChart } from "../components/charts/lineChart/component";
-
 import { PieChart } from "../components/charts/pieChart/component";
-
 import { BarChart } from "../components/charts/barChart/component";
-
 import { TreeMap } from "../components/charts/treeMap/component";
-
-import { AddNew } from "../components/addNew/component";
-
-import React from "react";
-import { ChartType } from "../components/charts/charts";
+import LineChart from "../components/charts/lineChart/component";
 import { defaultPieChartConfig } from "../components/charts/pieChart/configurator";
 import { defaultBarChartConfig } from "../components/charts/barChart/configurator";
+import { defaultLineChartConfig } from "../components/charts/lineChart/configurator";
+import { AddNew } from "../components/addNew/component";
+import React from "react";
+import { ChartType } from "../components/charts/charts";
 
 export const getComponent = (
   chartType: string,
@@ -21,11 +17,10 @@ export const getComponent = (
   let component = {};
   switch (chartType) {
     case ChartType.LineChart:
-      component = <LineChart series={series} />;
+      component = <LineChart {...defaultLineChartConfig} data={series} />;
       break;
     case ChartType.PieChart:
-      const config = defaultPieChartConfig;
-      component = <PieChart {...config} data={series} />;
+      component = <PieChart {...defaultPieChartConfig} data={series} />;
       break;
     case ChartType.BarChart:
       component = <BarChart {...defaultBarChartConfig} data={series} />;

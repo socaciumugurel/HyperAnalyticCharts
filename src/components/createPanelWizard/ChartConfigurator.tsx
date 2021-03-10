@@ -5,9 +5,9 @@ import { processPieChartData } from "../charts/pieChart/dataProcessor";
 import { ChartType } from "../charts/charts";
 import { BarChartConfigurator } from "../charts/barChart/configurator";
 import { processBarChartData } from "../charts/barChart/dataProcessor";
-import { LineChart } from "../charts/lineChart/component";
 import { processLineChartData } from "../charts/lineChart/dataProcessor";
 import { PieChartConfigurator } from "../charts/pieChart/configurator";
+import LineChartConfigurator from "../charts/lineChart/configurator";
 
 const ChartConfigurator = (props: any) => {
   const [selectedChartType, setSelectedChartType] = useState("");
@@ -54,14 +54,13 @@ const ChartConfigurator = (props: any) => {
       case ChartType.PieChart:
         return <PieChartConfigurator series={series} />;
       case ChartType.LineChart:
-        return <LineChart series={series} />;
+        return <LineChartConfigurator series={series} />;
       case ChartType.BarChart:
         return <BarChartConfigurator series={series} />;
     }
   };
 
-  const selectAxis = (placeHolder: any, axis: any) => {
-    const { Option } = Select;
+  const selectAxis = (placeHolder: any, axis: string) => {
     return (
       <Select
         showSearch
@@ -69,7 +68,9 @@ const ChartConfigurator = (props: any) => {
         placeholder={placeHolder}
         optionFilterProp="children"
         onChange={(value: string) => {
-          setChartMetadata(value);
+          var chartMetadataCopy: any = { ...chartMetadata };
+          chartMetadataCopy[axis] = value;
+          setChartMetadata(chartMetadataCopy);
         }}
         filterOption={(input, option: any) =>
           option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
@@ -103,13 +104,13 @@ const ChartConfigurator = (props: any) => {
           option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
       >
-        <Option key="1" value={ChartType.BarChart}>
+        <Option key={ChartType.BarChart} value={ChartType.BarChart}>
           Bar
         </Option>
-        <Option key="2" value={ChartType.LineChart}>
+        <Option key={ChartType.BarChart} value={ChartType.LineChart}>
           Line
         </Option>
-        <Option key="3" value={ChartType.PieChart}>
+        <Option key={ChartType.BarChart} value={ChartType.PieChart}>
           Pie
         </Option>
       </Select>
@@ -119,6 +120,7 @@ const ChartConfigurator = (props: any) => {
         onClick={() => {
           {
             var series = processData(selectedChartType, data, chartMetadata);
+            console.log(series);
             setProcessedData(series);
           }
         }}
