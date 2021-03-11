@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Select, Button } from "antd";
-import { loadConnections } from "../../redux/actions/dataConnectionActions";
+import { Button, Layout, Select } from "antd";
+import {
+  loadConnections,
+  saveConnection,
+  deleteConnection,
+} from "../../redux/actions/dataConnectionActions";
 import { loadData } from "../../redux/actions/createPanelActions";
 import { connect } from "react-redux";
 import { DataConnection } from "../../models/DataConnection";
@@ -13,32 +17,56 @@ const DataConnections = (props: any) => {
   const { connections } = props;
   const [connectionDetails, setConnectionDetails] = useState<DataConnection>();
   const [displayTable, setDisplayTable] = useState(false);
+  const newConnection: DataConnection = {
+    id: "",
+    description: "",
+    name: "",
+    url: "",
+  };
 
   useEffect(() => {
     if (connections.length === 0) {
-      props.loadConnections("http://localhost:3001/connections");
+      props.loadConnections();
     }
   }, []);
+
   const handleChange = (connectionId: string) => {
     var connectionDetails = connections.find(
       (con: DataConnection) => con.id === connectionId
     );
-    setConnectionDetails(connectionDetails);
+    setConnectionDetails({ ...connectionDetails });
   };
 
-  const handleClick = (e: any) => {
-    e.preventDefault();
+  const handleLoadData = (url: string) => {
+    props.loadData(url).then(() => setDisplayTable(true));
+  };
+
+  const handleFormSubmit = (fields: any) => {
+    const connection = { ...connectionDetails, ...fields };
+    props
+      .saveConnection(connection)
+      .then(() => setConnectionDetails(newConnection));
+  };
+
+  const handleCreate = () => {
+    setConnectionDetails(newConnection);
+  };
+
+  const handleDelete = () => {
     if (!connectionDetails) {
       return;
     }
-    const connectionUrl = connectionDetails.url;
-    props.loadData(connectionUrl).then(() => setDisplayTable(true));
+    props.deleteConnection(connectionDetails).then(() => {
+      setConnectionDetails(undefined);
+      setDisplayTable(false);
+    });
   };
 
   return (
     <div style={{ paddingLeft: 30, paddingTop: 30 }}>
       <Select
         showSearch
+        value={connectionDetails?.id}
         style={{ width: 200 }}
         placeholder="Select data connection"
         optionFilterProp="children"
@@ -53,18 +81,26 @@ const DataConnections = (props: any) => {
           </Option>
         ))}
       </Select>
+
+      <Button type="primary" style={{ marginLeft: 10 }} onClick={handleCreate}>
+        New Connection
+      </Button>
       <Button
+        danger
         type="primary"
-        size="middle"
         style={{ marginLeft: 10 }}
-        onClick={handleClick}
+        onClick={handleDelete}
       >
-        Load Data
+        Delete Connection
       </Button>
       <br />
       <br />
       {connectionDetails ? (
-        <DataConnectionForm dataConnection={{ ...connectionDetails }} />
+        <DataConnectionForm
+          dataConnection={connectionDetails}
+          onSubmit={handleFormSubmit}
+          onLoadData={handleLoadData}
+        />
       ) : null}
       <br />
       <br />
@@ -91,6 +127,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = {
   loadConnections,
   loadData,
+  saveConnection,
+  deleteConnection,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DataConnections);
