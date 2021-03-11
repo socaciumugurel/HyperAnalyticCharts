@@ -1,41 +1,41 @@
 import { Button, Form, Input, Select } from "antd";
-import React, { useState } from "react";
+import { useForm } from "antd/lib/form/Form";
+
+import React, { useEffect, useState } from "react";
 import { DataConnection } from "../../models/DataConnection";
 
-const DataConnectionForm = (props: { dataConnection: DataConnection }) => {
-  const { dataConnection } = props;
-  const { Option } = Select;
+const DataConnectionForm = (props: {
+  dataConnection: DataConnection;
+  onSubmit: any;
+  onLoadData: any;
+}) => {
   const { TextArea } = Input;
-  const defaultHttpSchema = "http://";
 
-  const [httpSchema, setHttpSchema] = useState(defaultHttpSchema);
-
+  const [form] = useForm();
   const layout = {
     labelCol: { span: 2 },
     wrapperCol: { span: 12 },
   };
 
-  const handleHttpSchemaCange = (newSchema: string) => {
-    setHttpSchema(newSchema);
+  useEffect(() => {
+    form.setFieldsValue({ ...props.dataConnection });
+  }, [props.dataConnection]);
+
+  const handleOnFinish = () => {
+    props.onSubmit(form.getFieldsValue());
   };
 
-  const selectBefore = (
-    <Select
-      defaultValue={defaultHttpSchema}
-      className="select-before"
-      onChange={handleHttpSchemaCange}
-    >
-      <Option value="http://">http://</Option>
-      <Option value="https://">https://</Option>
-    </Select>
-  );
+  const handleLoadData = () => {
+    const url = form.getFieldValue("url");
+    props.onLoadData(url);
+  };
+
   return (
     <Form
+      form={form}
       {...layout}
       name="connectionForm"
-      initialValues={dataConnection}
-      // onFinish={onFinish}
-      // onFinishFailed={onFinishFailed}
+      onFinish={handleOnFinish}
     >
       <Form.Item
         label="Name"
@@ -52,16 +52,14 @@ const DataConnectionForm = (props: { dataConnection: DataConnection }) => {
 
       <Form.Item label="Description" name="description">
         <TextArea
-          placeholder="Add a name for your connection. Optional"
+          placeholder="Add a description for your connection. Optional"
           autoSize
         />
       </Form.Item>
 
       <Form.Item
-        {...layout}
         label="URL"
         name="url"
-        initialValue={(value: string) => value.slice(4)}
         rules={[{ required: true, message: "Please provide a valid URL!" }]}
       >
         <Input placeholder="Add a valid URL" />
@@ -69,7 +67,10 @@ const DataConnectionForm = (props: { dataConnection: DataConnection }) => {
 
       <Form.Item wrapperCol={{ offset: 2, span: 12 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Save
+        </Button>
+        <Button style={{ marginLeft: 10 }} onClick={handleLoadData}>
+          Load Data
         </Button>
       </Form.Item>
     </Form>
