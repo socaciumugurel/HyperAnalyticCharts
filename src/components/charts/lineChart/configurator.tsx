@@ -1,113 +1,58 @@
-import React from "react";
-import { Slider, Row, Col, InputNumber, Divider, Switch, Select } from "antd";
-import LineChart from "./component";
+import { Col, Collapse, InputNumber, Row, Select, Slider, Switch } from "antd";
+import React, { useState } from "react";
+import { LinearScale } from "@nivo/scales";
 import { LineSvgProps } from "@nivo/line";
-import { useState } from "react";
+import { ILineActions } from "./models";
 
-export const defaultLineChartConfig: LineSvgProps = {
-  data: [],
-  margin: { top: 50, right: 110, bottom: 50, left: 60 },
-  xScale: { type: "point" },
-  yScale: {
-    type: "linear",
-    min: "auto",
-    max: "auto",
-    stacked: true,
-    reverse: false,
-  },
-  yFormat: " >-.2f",
-  axisTop: null,
-  axisRight: null,
-  axisBottom: {
-    orient: "bottom",
-    tickSize: 5,
-    tickPadding: 5,
-    tickRotation: 0,
-    legend: "transportation",
-    legendOffset: 36,
-    legendPosition: "middle",
-  },
-  axisLeft: {
-    orient: "left",
-    tickSize: 5,
-    tickPadding: 5,
-    tickRotation: 0,
-    legend: "count",
-    legendOffset: -40,
-    legendPosition: "middle",
-  },
-  lineWidth: 2,
-  pointSize: 8,
-  pointColor: { theme: "background" },
-  pointBorderWidth: 3,
-  pointBorderColor: { from: "serieColor" },
-  pointLabelYOffset: -12,
-  areaBaselineValue: 30,
-  areaOpacity: 0.3,
-  useMesh: true,
-  legends: [
-    {
-      anchor: "right",
-      direction: "column",
-      justify: false,
-      translateX: 94,
-      translateY: 0,
-      itemsSpacing: 0,
-      itemDirection: "left-to-right",
-      itemWidth: 80,
-      itemHeight: 20,
-      itemOpacity: 0.75,
-      symbolSize: 12,
-      symbolShape: "circle",
-      symbolBorderColor: "rgba(0, 0, 0, .5)",
-      effects: [
-        {
-          on: "hover",
-          style: {
-            itemBackground: "rgba(0, 0, 0, .03)",
-            itemOpacity: 1,
-          },
-        },
-      ],
-    },
-  ],
-};
-
-const { Option } = Select;
-
-const LineChartConfigurator = (props: any) => {
-  const [lineChartConfig, setLineChartConfig] = useState(
-    defaultLineChartConfig
-  );
-
-  const handleLineWidth = (value: number) => {
-    setLineChartConfig({ ...lineChartConfig, lineWidth: value });
-  };
-
-  const handleLineType = (
-    value:
-      | "basis"
-      | "cardinal"
-      | "catmullRom"
-      | "linear"
-      | "monotoneX"
-      | "monotoneY"
-      | "natural"
-      | "step"
-      | "stepAfter"
-      | "stepBefore"
-  ) => {
-    setLineChartConfig({ ...lineChartConfig, curve: value });
-  };
-
+const Configurator = (props: LineSvgProps & ILineActions) => {
+  const { Option } = Select;
+  const { Panel } = Collapse;
+  const [minyScale, setMinyScale] = useState(0);
+  const [maxyScale, setMaxYScale] = useState(0);
+  const [disabled, setDisabled] = useState(true);
   return (
-    <div>
-      <div className="panel" style={{ height: 500, width: "60%", padding: 0 }}>
-        <LineChart {...lineChartConfig} data={props.series} />
-      </div>
-      <div className="config-panel">
-        <h1>Configurations</h1>
+    <Collapse defaultActiveKey={["1"]}>
+      <Panel header="Configure Y Scale" key="1">
+        <Row>
+          <h4>Stacked</h4>
+          <Col span={4}>
+            <Switch onChange={props.setStackedMode} defaultChecked />
+          </Col>
+        </Row>
 
+        <Row>
+          <h4>Auto Axis</h4>
+          <Col span={4}>
+            <Switch
+              onChange={(value: boolean) => {
+                setDisabled(value);
+                if (value) props.setYScaleAuto();
+              }}
+              defaultChecked={(props.yScale as LinearScale).stacked}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={17}>
+            <Slider
+              range
+              disabled={disabled}
+              onChange={(value: [number, number]) => {
+                setMaxYScale(value[1]);
+                setMinyScale(value[0]);
+                props.setYScaleValue(value);
+              }}
+              value={[minyScale, maxyScale]}
+              max={200000}
+              step={5000}
+              min={5000}
+              defaultValue={[9000, 135000]}
+            ></Slider>
+          </Col>
+        </Row>
+      </Panel>
+      <Panel header="Style" key="2">
+        <h4>Line Type</h4>
         <Row>
           <Select
             showSearch
@@ -117,7 +62,7 @@ const LineChartConfigurator = (props: any) => {
             filterOption={(input: string, option: any) =>
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
-            onSelect={handleLineType}
+            onSelect={props.setLineType}
           >
             <Option value="basis">Basis</Option>
             <Option value="cardinal">cardinal</Option>
@@ -131,31 +76,30 @@ const LineChartConfigurator = (props: any) => {
             <Option value="stepBefore">stepBefore</Option>
           </Select>
         </Row>
-        <Row>
-          <h4>Line Width</h4>
-          <Col span={17}>
-            <Slider
-              onChange={handleLineWidth}
-              value={lineChartConfig.lineWidth}
-              max={20}
-              step={1}
-              min={0}
-              defaultValue={2}
-            ></Slider>
-          </Col>
-          <Col span={7}>
-            <InputNumber
-              min={0}
-              max={45}
-              step={1}
-              value={lineChartConfig.lineWidth}
-              onChange={handleLineWidth}
-            />
-          </Col>
-        </Row>
-      </div>
-    </div>
+
+        <h4>Line Width</h4>
+        <Col span={17}>
+          <Slider
+            onChange={props.setLineWidth}
+            value={props.lineWidth}
+            max={20}
+            step={1}
+            min={0}
+            defaultValue={2}
+          ></Slider>
+        </Col>
+        <Col span={7}>
+          <InputNumber
+            min={0}
+            max={45}
+            step={1}
+            value={props.lineWidth}
+            onChange={props.setLineWidth}
+          />
+        </Col>
+      </Panel>
+    </Collapse>
   );
 };
 
-export default LineChartConfigurator;
+export default Configurator;

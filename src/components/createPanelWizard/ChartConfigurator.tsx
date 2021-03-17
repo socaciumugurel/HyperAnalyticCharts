@@ -7,7 +7,7 @@ import { BarChartConfigurator } from "../charts/barChart/configurator";
 import { processBarChartData } from "../charts/barChart/dataProcessor";
 import { processLineChartData } from "../charts/lineChart/dataProcessor";
 import { PieChartConfigurator } from "../charts/pieChart/configurator";
-import LineChartConfigurator from "../charts/lineChart/configurator";
+import LineChartConfigurator from "../charts/lineChart/component";
 
 const ChartConfigurator = (props: any) => {
   const [selectedChartType, setSelectedChartType] = useState("");
@@ -107,10 +107,10 @@ const ChartConfigurator = (props: any) => {
         <Option key={ChartType.BarChart} value={ChartType.BarChart}>
           Bar
         </Option>
-        <Option key={ChartType.BarChart} value={ChartType.LineChart}>
+        <Option key={ChartType.LineChart} value={ChartType.LineChart}>
           Line
         </Option>
-        <Option key={ChartType.BarChart} value={ChartType.PieChart}>
+        <Option key={ChartType.PieChart} value={ChartType.PieChart}>
           Pie
         </Option>
       </Select>
@@ -120,7 +120,6 @@ const ChartConfigurator = (props: any) => {
         onClick={() => {
           {
             var series = processData(selectedChartType, data, chartMetadata);
-            console.log(series);
             setProcessedData(series);
           }
         }}
