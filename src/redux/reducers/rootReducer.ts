@@ -6,7 +6,8 @@ import {
 } from "./createPanelReducer";
 import connections from "./dataConnectionReducer";
 import charts from "./chartReducer";
-import lineChartReducer from "./lineChartReducer"
+import lineChartReducer from "./lineChartReducer";
+import pieChartReducer from "./pieChartReducer";
 
 const rootReducer = combineReducers({
   dashboards,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   dynamicTable,
   connections,
   charts,
-  lineChartReducer
+  lineChartReducer,
+  pieChartReducer,
 });
 
 export default rootReducer;

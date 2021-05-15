@@ -1,13 +1,13 @@
-import { PieChart } from "../components/charts/pieChart/component";
 import { BarChart } from "../components/charts/barChart/component";
 import { TreeMap } from "../components/charts/treeMap/component";
 import { ResponsiveLine } from "@nivo/line";
-import { defaultPieChartConfig } from "../components/charts/pieChart/configurator";
+import { defaultPieChartConfig } from "../components/charts/pieChart/component";
 import { defaultBarChartConfig } from "../components/charts/barChart/configurator";
 import { defaultLineChartConfig } from "../components/charts/lineChart/component";
 import { AddNew } from "../components/addNew/component";
 import React from "react";
 import { ChartType } from "../components/charts/charts";
+import { ResponsivePie } from "@nivo/pie";
 
 export const getComponent = (
   chartType: string,
@@ -20,7 +20,7 @@ export const getComponent = (
       component = <ResponsiveLine {...defaultLineChartConfig} data={series} />;
       break;
     case ChartType.PieChart:
-      component = <PieChart {...defaultPieChartConfig} data={series} />;
+      component = <ResponsivePie {...defaultPieChartConfig} data={series} />;
       break;
     case ChartType.BarChart:
       component = <BarChart {...defaultBarChartConfig} data={series} />;

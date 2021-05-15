@@ -6,8 +6,8 @@ import { ChartType } from "../charts/charts";
 import { BarChartConfigurator } from "../charts/barChart/configurator";
 import { processBarChartData } from "../charts/barChart/dataProcessor";
 import { processLineChartData } from "../charts/lineChart/dataProcessor";
-import { PieChartConfigurator } from "../charts/pieChart/configurator";
 import LineChartConfigurator from "../charts/lineChart/component";
+import PieChartConfigurator from "../charts/pieChart/component";
 
 const ChartConfigurator = (props: any) => {
   const [selectedChartType, setSelectedChartType] = useState("");
