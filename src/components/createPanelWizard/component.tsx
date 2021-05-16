@@ -39,7 +39,7 @@ export class CreatePanelWizard extends React.Component<any, any> {
 
   render() {
     const { current } = this.state;
-    const { Header, Content, Footer } = Layout;
+    const { Content } = Layout;
 
     return (
       <Layout style={{ height: "100%" }}>

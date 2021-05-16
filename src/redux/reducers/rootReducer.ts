@@ -8,6 +8,7 @@ import connections from "./dataConnectionReducer";
 import charts from "./chartReducer";
 import lineChartReducer from "./lineChartReducer";
 import pieChartReducer from "./pieChartReducer";
+import barChartReducer from "./barChartReducer";
 
 const rootReducer = combineReducers({
   dashboards,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   charts,
   lineChartReducer,
   pieChartReducer,
+  barChartReducer,
 });
 
 export default rootReducer;

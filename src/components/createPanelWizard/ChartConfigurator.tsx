@@ -3,11 +3,11 @@ import { Select, Button } from "antd";
 import { connect } from "react-redux";
 import { processPieChartData } from "../charts/pieChart/dataProcessor";
 import { ChartType } from "../charts/charts";
-import { BarChartConfigurator } from "../charts/barChart/configurator";
 import { processBarChartData } from "../charts/barChart/dataProcessor";
 import { processLineChartData } from "../charts/lineChart/dataProcessor";
 import LineChartConfigurator from "../charts/lineChart/component";
 import PieChartConfigurator from "../charts/pieChart/component";
+import BarChartConfigurator from "../charts/barChart/component";
 
 const ChartConfigurator = (props: any) => {
   const [selectedChartType, setSelectedChartType] = useState("");
